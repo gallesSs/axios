@@ -1,6 +1,7 @@
 import About from "@/components/home/About";
 import Approach from "@/components/home/Approach";
 import Collection from "@/components/home/Collection";
+import Find from "@/components/home/Find";
 import Hero from "@/components/home/Hero";
 import Modular from "@/components/home/Modular";
 
@@ -21,6 +22,9 @@ export default function Home() {
       </section>
       <section className="mb">
         <Modular />
+      </section>
+      <section className="mb">
+        <Find />
       </section>
     </main>
   );
