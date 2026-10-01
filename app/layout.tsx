@@ -1,6 +1,23 @@
 import type { Metadata } from "next";
+import { Manrope, Plus_Jakarta_Sans } from "next/font/google";
+import "lenis/dist/lenis.css";
 import "./globals.css";
 import Header from "@/components/layout/Header";
+import Preloader from "@/components/motion/Preloader";
+import SmoothScroll from "@/components/motion/SmoothScroll";
+
+const manrope = Manrope({
+  subsets: ["latin"],
+  variable: "--font-manrope",
+  display: "swap",
+});
+
+const plusJakartaSans = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  style: ["normal", "italic"],
+  variable: "--font-jakarta",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -9,13 +26,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html
-      lang="en"
-      className={`h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">
-        <Header />
-        {children}
+    <html lang="en" className={`${manrope.variable} ${plusJakartaSans.variable}`}>
+      <body>
+        <SmoothScroll>
+          <Preloader />
+          <Header />
+          {children}
+        </SmoothScroll>
       </body>
     </html>
   );

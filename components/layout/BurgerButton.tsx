@@ -1,5 +1,7 @@
 "use client";
 
+import styles from "./BurgerButton.module.css";
+
 interface BurgerButtonProps {
     isOpen: boolean;
     onClick: () => void;
@@ -20,14 +22,14 @@ export default function BurgerButton({ isOpen, onClick }: BurgerButtonProps) {
         <button
             type="button"
             onClick={onClick}
-            className="shrink-0 cursor-pointer"
+            className={styles.button}
         >
             <svg width="69" height="20" viewBox="0 0 69 20" fill="none" aria-hidden="true">
                 <line
                     y1="2"
                     x2="69"
                     y2="2"
-                    stroke="white"
+                    stroke="currentColor"
                     style={{
                         ...LINE_STYLE,
                         transform: isOpen ? TOP_LINE_OPEN : "none",
@@ -37,7 +39,7 @@ export default function BurgerButton({ isOpen, onClick }: BurgerButtonProps) {
                     y1="10"
                     x2="69"
                     y2="10"
-                    stroke="white"
+                    stroke="currentColor"
                     style={{
                         ...LINE_STYLE,
                         transformOrigin: "center",
@@ -49,7 +51,7 @@ export default function BurgerButton({ isOpen, onClick }: BurgerButtonProps) {
                     y1="18"
                     x2="69"
                     y2="18"
-                    stroke="white"
+                    stroke="currentColor"
                     style={{
                         ...LINE_STYLE,
                         transform: isOpen ? BOTTOM_LINE_OPEN : "none",

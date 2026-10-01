@@ -1,0 +1,324 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  /* Следующая карточка выглядывает до края экрана, но без горизонтального скролла */
+  overflow-x: clip;
+}
+
+.swiper {
+  width: 100%;
+  overflow: visible !important;
+}
+
+.tag {
+  color: var(--Primary-01, #161616);
+  text-align: right;
+
+  /* m/h3 */
+  font-family: Manrope;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 110%; /* 17.6px */
+  text-transform: uppercase;
+  align-self: flex-end;
+}
+
+.title {
+  color: var(--Accent, #061025);
+
+  /* m/h1 */
+  font-family: Manrope;
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 100%; /* 48px */
+  text-transform: uppercase;
+}
+
+.heading {
+  margin-bottom: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.card {
+  display: flex !important;
+  flex-direction: column;
+  gap: 4px;
+  user-select: none;
+}
+
+.media {
+  position: relative;
+  aspect-ratio: 6 / 7;
+  overflow: hidden;
+  background: #e9e9e9;
+}
+
+.mediaInner {
+  position: absolute;
+  inset: 0;
+}
+
+.media img {
+  position: absolute;
+  top: 0;
+  left: -15%;
+  width: 130%;
+  max-width: none;
+  height: 100%;
+  object-fit: cover;
+  will-change: transform;
+}
+
+/* Неактивные карточки чуть приглушены — фокус на текущей */
+.media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  opacity: 0.35;
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+:global(.swiper-slide-active) .media::after {
+  opacity: 0;
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cardTitle {
+  color: var(--Primary-01, #161616);
+
+  /* m/h3 */
+  font-family: Manrope;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 110%; /* 17.6px */
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+.cardText {
+  color: var(--Primary-01, #161616);
+
+  /* m/body */
+  font-family: "Plus Jakarta Sans";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%; /* 16.8px */
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 4px;
+}
+
+.counter {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-family: Manrope;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 110%;
+  color: var(--Primary-01, #161616);
+}
+
+.counterWindow {
+  display: inline-flex;
+  overflow: hidden;
+  height: 1.1em;
+}
+
+.counterTotal {
+  opacity: 0.4;
+}
+
+.progress {
+  position: relative;
+  flex: 1;
+  height: 1px;
+  background: rgba(22, 22, 22, 0.15);
+  overflow: hidden;
+}
+
+.progressBar {
+  position: absolute;
+  inset: 0;
+  background: var(--Accent, #061025);
+  transform: scaleX(0.2);
+  transform-origin: left;
+  transition: transform 0.15s linear;
+}
+
+.arrows {
+  display: flex;
+  gap: 8px;
+}
+
+.arrow {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(22, 22, 22, 0.2);
+  display: grid;
+  place-items: center;
+  font-size: 16px;
+  color: var(--Primary-01, #161616);
+  cursor: pointer;
+  transition:
+    background-color 0.4s,
+    color 0.4s,
+    border-color 0.4s;
+}
+
+@media (hover: hover) {
+  .arrow:hover {
+    background: var(--Accent, #061025);
+    border-color: var(--Accent, #061025);
+    color: #fff;
+  }
+}
+
+.button {
+  padding: 13.5px 0;
+  width: 100%;
+  border: 1px solid var(--Accent, #061025);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  color: var(--Accent, #061025);
+
+  /* m/button text */
+  font-family: Manrope;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 110%; /* 15.4px */
+  text-transform: uppercase;
+}
+
+/* ---------- Hover: заливка снизу + перекат текста + пролёт стрелки ---------- */
+.button {
+  --ease: cubic-bezier(0.76, 0, 0.24, 1);
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: transparent;
+  cursor: pointer;
+  transition:
+    color 0.6s var(--ease),
+    transform 0.3s var(--ease);
+}
+
+/* Заливка поднимается снизу «волной» с скруглённым краем */
+.button::before {
+  content: "";
+  position: absolute;
+  left: -10%;
+  right: -10%;
+  top: 0;
+  height: 100%;
+  z-index: -1;
+  background: var(--Accent, #061025);
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  transform: translateY(101%);
+  transition:
+    transform 0.6s var(--ease),
+    border-radius 0.6s var(--ease);
+}
+
+.buttonLabel {
+  display: block;
+  overflow: hidden;
+  height: 1.1em;
+}
+
+/* Текст уезжает вверх, снизу приезжает копия */
+.buttonText {
+  position: relative;
+  display: block;
+  transition: transform 0.6s var(--ease);
+}
+
+.buttonText::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 100%;
+  left: 0;
+}
+
+/* Стрелка улетает вправо, новая прилетает слева */
+.buttonIcon {
+  position: relative;
+  display: block;
+  width: 11px;
+  height: 9px;
+  overflow: hidden;
+}
+
+.buttonIcon svg {
+  position: absolute;
+  inset: 0;
+  transition: transform 0.6s var(--ease);
+}
+
+.buttonIcon svg:last-child {
+  transform: translateX(-150%);
+}
+
+@media (hover: hover) {
+  .button:hover {
+    color: #fff;
+  }
+
+  .button:hover::before {
+    transform: translateY(0);
+    border-radius: 0;
+  }
+
+  .button:hover .buttonText {
+    transform: translateY(-100%);
+  }
+
+  .button:hover .buttonIcon svg:first-child {
+    transform: translateX(150%);
+  }
+
+  .button:hover .buttonIcon svg:last-child {
+    transform: translateX(0);
+    transition-delay: 0.1s;
+  }
+}
+
+.button:active {
+  transform: scale(0.98);
+}
+
+.button:focus-visible {
+  outline: 2px solid var(--Accent, #061025);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button,
+  .button::before,
+  .buttonText,
+  .buttonIcon svg {
+    transition-duration: 0.01ms !important;
+  }
+}

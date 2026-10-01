@@ -1,0 +1,40 @@
+.header {
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    /* Выше Swiper и прочих локальных стекинг-контекстов, но ниже прелоадера (100) */
+    z-index: 50;
+    padding: 20px 0;
+    color: var(--Primary-02, #fff);
+    background-color: transparent;
+    transition:
+        padding 0.8s var(--ease),
+        color 0.6s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* С подложкой шапка чуть «поджимается» */
+.compact {
+    padding: 14px 0;
+}
+
+.inkDark {
+    color: var(--Accent, #061025);
+}
+
+.plate {
+    position: absolute;
+    inset: 0;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    pointer-events: none;
+}
+
+.inner {
+    position: relative;
+    z-index: 11;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

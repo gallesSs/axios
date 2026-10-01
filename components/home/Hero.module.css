@@ -1,0 +1,77 @@
+.hero {
+  position: relative;
+  overflow: hidden;
+  height: 100vh;
+  max-height: 667px;
+  padding-top: 260px;
+  background-color: #061025;
+}
+
+.bg {
+  position: absolute;
+  inset: 0;
+  background-image: url("/home/hero.png");
+  background-size: cover;
+  background-position: center;
+  will-change: transform, clip-path;
+}
+
+.content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.span {
+  color: var(--Primary-02, #fff);
+
+  /* m/h3 */
+  font-family: var(--font-manrope);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 110%; /* 17.6px */
+  text-transform: uppercase;
+}
+
+.textWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 173px;
+}
+
+.text {
+  color: var(--Primary-02, #fff);
+
+  /* m/body */
+  font-family: var(--font-jakarta);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%; /* 16.8px */
+  max-width: 158px;
+}
+
+.title {
+  display: flex;
+  color: var(--Primary-02, #fff);
+
+  /* m/huge */
+  font-family: var(--font-manrope);
+  font-size: 160px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 100%; /* 160px */
+  text-transform: uppercase;
+}
+
+.letterMask {
+  display: inline-block;
+  overflow: hidden;
+}
+
+.letter {
+  display: inline-block;
+}
