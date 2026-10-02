@@ -7,7 +7,7 @@ import s from "./About.module.css";
 
 function About() {
   return (
-    <>
+    <div className={s.about}>
       <div className={`container ${s.textContainer}`}>
         <ScrambleText text="/01" className={s.tag} />
         <FlipLetters text="ABOUT" className={s.title} />
@@ -27,7 +27,7 @@ function About() {
           />
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

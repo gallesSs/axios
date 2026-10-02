@@ -1,3 +1,43 @@
+/* Design tokens (Figma: «Дома портфолио»; desktop frame — 1920px) */
+:root {
+  /* Цвета */
+  --Primary-01: #161616;
+  --Primary-02: #fff;
+  --Accent: #061025;
+
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+
+  /* 1 «пиксель макета»: на 1920px = 1px, ниже — пропорционально, выше 1920 не растёт */
+  --u: min(calc(100vw / 1920), 1px);
+
+  /* Типографика: размер мобилки — минимум, десктопный размер из макета масштабируется через --u */
+  --fs-huge: max(160px, calc(480 * var(--u))); /* m/huge 160 → huge 480 */
+  --fs-h1: max(48px, calc(128 * var(--u))); /* m/h1 48 → h1 128 */
+  --fs-h2: max(32px, calc(72 * var(--u))); /* m/h2 32 → h2 72 */
+  --fs-h3: max(16px, calc(48 * var(--u))); /* m/h3 16 → h3 48 */
+  --fs-p1: max(16px, calc(24 * var(--u))); /* m/h3 16 → p1 24 */
+  --fs-body: 14px; /* m/body 14 → body 16 */
+  --fs-button: 14px; /* m/button text 14 → p1 24 */
+
+  /* Сетка */
+  --gutter: 20px;
+  --section-gap: max(60px, calc(130 * var(--u)));
+}
+
+@media (min-width: 768px) {
+  :root {
+    --gutter: 40px;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --fs-body: 16px;
+    --fs-button: var(--fs-p1);
+  }
+}
+
 /* Reset (replaces Tailwind preflight) */
 *,
 *::before,
@@ -15,8 +55,7 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-family:
-    var(--font-manrope), ui-sans-serif, system-ui, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    var(--font-sans), "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
 body {
@@ -77,9 +116,14 @@ textarea {
 /* Utilities */
 .container {
   width: 100%;
-  padding: 0 20px;
+  padding: 0 var(--gutter);
 }
 
 .mb {
-  margin-bottom: 60px;
+  margin-bottom: var(--section-gap);
+}
+
+/* После hero отступ в макете чуть меньше: 117px против 130px */
+.mb-hero {
+  margin-bottom: max(60px, calc(117 * var(--u)));
 }

@@ -1,11 +1,11 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useState, type CSSProperties } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import type { Swiper as SwiperType } from "swiper";
 import { A11y, Keyboard, Parallax } from "swiper/modules";
-import { AnimatePresence, motion, type Variants } from "motion/react";
+import { motion, type Variants } from "motion/react";
 import { EASE_OUT_EXPO } from "@/components/motion/config";
+import RollButton from "@/components/motion/RollButton";
 import ScatterLetters from "@/components/motion/ScatterLetters";
 import ScrambleText from "@/components/motion/ScrambleText";
 import "swiper/css";
@@ -39,7 +39,10 @@ const ITEMS = [
   },
 ];
 
-const pad = (n: number) => String(n).padStart(2, "0");
+/** С этой ширины слайдер работает в десктопном режиме: активная карточка крупнее и по центру */
+const DESKTOP = 1024;
+/** На десктопе по макету активна третья карточка — по две видны с каждой стороны */
+const DESKTOP_INITIAL = 2;
 
 /** Маска карточки поднимается снизу «шторкой», каскадом по слайдам */
 const cardMedia: Variants = {
@@ -69,8 +72,6 @@ const cardText: Variants = {
 };
 
 function Collection() {
-  const swiperRef = useRef<SwiperType | null>(null);
-  const barRef = useRef<HTMLSpanElement>(null);
   const [active, setActive] = useState(0);
 
   return (
@@ -81,29 +82,54 @@ function Collection() {
       </div>
 
       {/* Обёртка-триггер: карточки появляются каскадом, когда слайдер попадает в кадр */}
-      <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }}>
+      <motion.div
+        className={s.slider}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}>
+      {/* Десктоп: резерв места под подпись активной карточки — все подписи в одной ячейке,
+          высота = самая длинная. Подписи в слайдах абсолютные, и смена слайда не двигает секцию */}
+      <div className={s.bodySizer} aria-hidden="true">
+        {ITEMS.map((item) => (
+          <div key={item.title} className={s.cardBody}>
+            <p className={s.cardTitle}>{item.title}</p>
+            <p className={s.cardText}>{item.text}</p>
+          </div>
+        ))}
+      </div>
       <Swiper
         className={s.swiper}
+        // Индекс активной карточки — для расчёта сдвига ленты на десктопе (см. CSS)
+        style={{ "--active": active } as CSSProperties}
         modules={[Parallax, Keyboard, A11y]}
         parallax
         grabCursor
         keyboard
         speed={900}
+        // Ширина/высота ленты меняются вместе с карточками; ResizeObserver Swiper'а на это
+        // делает мгновенный пересчёт и обрывает анимацию — слушаем только ресайз окна
+        resizeObserver={false}
         slidesPerView={1.12}
         spaceBetween={12}
         breakpoints={{
           768: { slidesPerView: 2.2, spaceBetween: 16 },
-          1200: { slidesPerView: 3.2, spaceBetween: 20 },
+          // Карточки разной ширины, и активная меняет размер на лету — Swiper такую ленту
+          // не посчитает, поэтому сдвиг задаётся в CSS от --active, а Swiper только ведёт индекс
+          [DESKTOP]: {
+            slidesPerView: "auto",
+            spaceBetween: 20,
+            centeredSlides: true,
+            slideToClickedSlide: true,
+            virtualTranslate: true,
+            // Лента не следует за пальцем/мышью (сдвиг в CSS), свайп лишь переключает слайд
+            grabCursor: false,
+          },
         }}
-        onSwiper={(sw) => (swiperRef.current = sw)}
-        onSlideChange={(sw) => setActive(sw.activeIndex)}
-        onProgress={(_, progress) => {
-          // Прогресс-бар двигаем напрямую, без ре-рендера на каждый кадр
-          if (barRef.current) {
-            const p = Math.min(Math.max(progress, 0), 1);
-            barRef.current.style.transform = `scaleX(${0.2 + p * 0.8})`;
-          }
-        }}>
+        onSwiper={(sw) => {
+          if (window.innerWidth >= DESKTOP) sw.slideTo(DESKTOP_INITIAL, 0);
+          setActive(sw.activeIndex);
+        }}
+        onSlideChange={(sw) => setActive(sw.activeIndex)}>
         {ITEMS.map((item, i) => (
           <SwiperSlide key={item.title} className={s.card}>
             <motion.div className={s.media} custom={i} variants={cardMedia}>
@@ -135,78 +161,23 @@ function Collection() {
       </Swiper>
       </motion.div>
 
-      {/* <div className={s.controls}>
-        <div className={s.counter} aria-live="polite">
-          <span className={s.counterWindow}>
-            <AnimatePresence mode="popLayout" initial={false}>
-              <motion.span
-                key={active}
-                initial={{ y: "100%" }}
-                animate={{ y: "0%" }}
-                exit={{ y: "-100%" }}
-                transition={{ duration: 0.6, ease: EASE_OUT_EXPO }}>
-                {pad(active + 1)}
-              </motion.span>
-            </AnimatePresence>
-          </span>
-          <span className={s.counterTotal}>/ {pad(ITEMS.length)}</span>
-        </div>
-
-        <span className={s.progress}>
-          <span ref={barRef} className={s.progressBar} />
-        </span>
-
-        <div className={s.arrows}>
-          <button
-            type="button"
-            className={s.arrow}
-            aria-label="Previous project"
-            onClick={() => swiperRef.current?.slidePrev()}>
-            ←
-          </button>
-          <button
-            type="button"
-            className={s.arrow}
-            aria-label="Next project"
-            onClick={() => swiperRef.current?.slideNext()}>
-            →
-          </button>
-        </div>
-      </div> */}
-
-      {/* Кнопка раскрывается от центра в стороны; триггер — обёртка без clip-path */}
-      <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 1 }}>
-      <motion.button
-        type="button"
+      <RollButton
         className={s.button}
-        variants={{
-          hidden: { clipPath: "inset(0% 50% 0% 50%)" },
-          visible: { clipPath: "inset(0% 0% 0% 0%)" },
-        }}
-        transition={{ duration: 1.2, ease: EASE_OUT_EXPO }}>
-        <span className={s.buttonLabel}>
-          <span className={s.buttonText} data-text="VIEW all HOUSEs">
-            VIEW all HOUSEs
-          </span>
-        </span>
-        <span className={s.buttonIcon} aria-hidden="true">
-          {[0, 1].map((i) => (
-            <svg
-              key={i}
-              xmlns="http://www.w3.org/2000/svg"
-              width="11"
-              height="9"
-              viewBox="0 0 11 9"
-              fill="none">
-              <path
-                d="M10.5 4.375L6.125 0L5.50813 0.616875L8.82438 3.9375L0 3.9375V4.8125L8.82438 4.8125L5.50813 8.13313L6.125 8.75L10.5 4.375Z"
-                fill="currentColor"
-              />
-            </svg>
-          ))}
-        </span>
-      </motion.button>
-      </motion.div>
+        text="VIEW all HOUSEs"
+        icon={
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="11"
+            height="9"
+            viewBox="0 0 11 9"
+            fill="none">
+            <path
+              d="M10.5 4.375L6.125 0L5.50813 0.616875L8.82438 3.9375L0 3.9375V4.8125L8.82438 4.8125L5.50813 8.13313L6.125 8.75L10.5 4.375Z"
+              fill="currentColor"
+            />
+          </svg>
+        }
+      />
     </div>
   );
 }

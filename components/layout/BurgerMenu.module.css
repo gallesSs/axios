@@ -4,7 +4,7 @@
     right: 0;
     z-index: 10;
     width: 100%;
-    padding: 90px 20px 20px;
+    padding: 90px var(--gutter) 20px;
     background-color: rgba(22, 22, 22, 0.5);
     backdrop-filter: blur(10px);
 }
@@ -24,9 +24,12 @@
     display: inline-block;
     transform-origin: 0% 100%;
     color: #fff;
-    font-size: 32px;
+    /* m/h2 → h2 */
+    font-size: var(--fs-h2);
     font-weight: 500;
     text-transform: uppercase;
+    /* Пробелы вокруг «/» как в макете: «01   /   HOME» */
+    white-space: pre;
     opacity: 0.5;
     transition: opacity 0.4s;
 }
@@ -35,8 +38,52 @@
     opacity: 1;
 }
 
+.link > span {
+    display: inline-block;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 @media (hover: hover) {
     .link:hover {
+        opacity: 1;
+    }
+
+    .link:hover > span:nth-child(2) {
+        transform: rotate(-20deg);
+    }
+
+    .link:hover > span:last-child {
+        transform: translateX(12px);
+    }
+}
+
+/* Десктоп: строки-плашки 120px (24 + 72 + 24), под ховером — тёмная заливка */
+@media (min-width: 1024px) {
+    .menu {
+        padding: calc(115 * var(--u)) var(--gutter) calc(55 * var(--u));
+        backdrop-filter: blur(20px);
+    }
+
+    .list {
+        gap: 0;
+    }
+
+    .link {
+        line-height: 100%;
+    }
+
+    .item {
+        padding: calc(24 * var(--u));
+        transition: background-color 0.4s;
+    }
+}
+
+@media (min-width: 1024px) and (hover: hover) {
+    .item:hover {
+        background-color: var(--Primary-01);
+    }
+
+    .item:hover .link {
         opacity: 1;
     }
 }

@@ -4,7 +4,7 @@
   height: 100vh;
   max-height: 667px;
   padding-top: 260px;
-  background-color: #061025;
+  background-color: var(--Accent);
 }
 
 .bg {
@@ -24,14 +24,14 @@
 }
 
 .span {
-  color: var(--Primary-02, #fff);
+  color: var(--Primary-02);
 
-  /* m/h3 */
-  font-family: var(--font-manrope);
-  font-size: 16px;
+  /* m/h3 → h3 */
+  font-family: var(--font-sans);
+  font-size: var(--fs-h3);
   font-style: normal;
   font-weight: 500;
-  line-height: 110%; /* 17.6px */
+  line-height: 110%;
   text-transform: uppercase;
 }
 
@@ -43,27 +43,27 @@
 }
 
 .text {
-  color: var(--Primary-02, #fff);
+  color: var(--Primary-02);
 
-  /* m/body */
-  font-family: var(--font-jakarta);
-  font-size: 14px;
+  /* m/body → body */
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
   font-style: normal;
   font-weight: 400;
-  line-height: 120%; /* 16.8px */
+  line-height: 120%;
   max-width: 158px;
 }
 
 .title {
   display: flex;
-  color: var(--Primary-02, #fff);
+  color: var(--Primary-02);
 
-  /* m/huge */
-  font-family: var(--font-manrope);
-  font-size: 160px;
+  /* m/huge → huge */
+  font-family: var(--font-sans);
+  font-size: var(--fs-huge);
   font-style: normal;
   font-weight: 400;
-  line-height: 100%; /* 160px */
+  line-height: 100%;
   text-transform: uppercase;
 }
 
@@ -74,4 +74,44 @@
 
 .letter {
   display: inline-block;
+}
+
+/* Планшет: композиция мобилки, но на весь экран и с заголовком у нижнего края */
+@media (min-width: 768px) {
+  .hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    max-height: none;
+    padding-top: 0;
+  }
+}
+
+/*
+ * Десктоп (макет 1920×944): заголовок AXIS у нижнего края со сдвигом 330px от края экрана,
+ * текстовый блок 290px прижат к его правому краю и заходит на него на 24px.
+ */
+@media (min-width: 1024px) {
+  .bg {
+    background-image: url("/home/hero-desktop.jpg");
+  }
+
+  .content {
+    align-self: flex-start;
+    gap: 0;
+    margin-left: calc(290 * var(--u));
+  }
+
+  .textWrapper {
+    align-self: flex-end;
+    gap: calc(12 * var(--u));
+    /* На узком десктопе 290px · scale слишком мало для заголовка — не уже 220px */
+    width: max(220px, calc(290 * var(--u)));
+    max-width: none;
+    margin-bottom: calc(-24 * var(--u));
+  }
+
+  .text {
+    max-width: none;
+  }
 }

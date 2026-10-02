@@ -6,8 +6,8 @@
     right: 0;
     /* Выше Swiper и прочих локальных стекинг-контекстов, но ниже прелоадера (100) */
     z-index: 50;
-    padding: 20px 0;
-    color: var(--Primary-02, #fff);
+    padding: var(--gutter) 0;
+    color: var(--Primary-02);
     background-color: transparent;
     transition:
         padding 0.8s var(--ease),
@@ -19,8 +19,15 @@
     padding: 14px 0;
 }
 
+@media (min-width: 1024px) {
+    .compact {
+        /* В макете нет состояния с подложкой — уменьшено пропорционально мобилке (20 → 14) */
+        padding: max(14px, calc(28 * var(--u))) 0;
+    }
+}
+
 .inkDark {
-    color: var(--Accent, #061025);
+    color: var(--Accent);
 }
 
 .plate {
@@ -37,4 +44,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+/* Мобилка 72×13 → десктоп 97×17 */
+.logo {
+    width: max(72px, calc(97 * var(--u)));
+    height: auto;
 }

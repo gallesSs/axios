@@ -77,7 +77,7 @@ export default function Header() {
                 }}
             />
             <div className={`container ${styles.inner}`}>
-                <Logo />
+                <Logo className={styles.logo} />
                 <BurgerButton isOpen={isOpen} onClick={() => setIsOpen((v) => !v)} />
             </div>
             <AnimatePresence>

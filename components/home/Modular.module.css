@@ -1,36 +1,49 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 16px;
 }
 
 .heading {
   display: flex;
   flex-direction: column;
   gap: 0;
+  margin-bottom: 12px;
+}
+
+.wrapperText {
+  color: #000;
+
+  /* m/h2 → h2 */
+  font-family: var(--font-sans);
+  font-size: var(--fs-h2);
+  font-style: normal;
+  font-weight: 500;
+  line-height: 100%;
+  text-transform: uppercase;
 }
 
 .tag {
-  color: var(--Primary-01, #161616);
+  color: var(--Primary-01);
 
-  /* m/h3 */
-  font-family: Manrope;
-  font-size: 16px;
+  /* m/h3 → h3 */
+  font-family: var(--font-sans);
+  font-size: var(--fs-h3);
   font-style: normal;
   font-weight: 500;
-  line-height: 110%; /* 17.6px */
+  line-height: 110%;
   text-transform: uppercase;
 }
 
 .title {
-  color: var(--Accent, #061025);
+  color: var(--Accent);
 
-  /* m/h1 */
-  font-family: Manrope;
-  font-size: 48px;
+  /* m/h1 → h1 */
+  font-family: var(--font-sans);
+  font-size: var(--fs-h1);
   font-style: normal;
   font-weight: 600;
-  line-height: 100%; /* 48px */
+  line-height: 100%;
   text-transform: uppercase;
 }
 
@@ -55,7 +68,7 @@
   left: 0;
   right: 0;
   height: 1px;
-  background: var(--Primary-01, #161616);
+  background: var(--Primary-01);
   transform-origin: 0% 50%;
 }
 
@@ -63,6 +76,7 @@
   display: block;
   overflow: hidden;
   padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
 }
 
 .top {
@@ -70,42 +84,115 @@
   display: flex;
   align-items: center;
   gap: 4px;
-  color: var(--Primary-01, #161616);
+  color: var(--Primary-01);
 
-  /* m/h3 */
-  font-family: Manrope;
-  font-size: 16px;
+  /* m/h3 → p1 */
+  font-family: var(--font-sans);
+  font-size: var(--fs-p1);
   font-style: normal;
   font-weight: 500;
-  line-height: 110%; /* 17.6px */
+  line-height: 110%;
   text-transform: uppercase;
 }
 
 .topTag {
-  color: var(--Primary-01, #161616);
+  color: var(--Primary-01);
 
-  /* m/h3 */
-  font-family: Manrope;
-  font-size: 16px;
+  /* m/h3 → p1 */
+  font-family: var(--font-sans);
+  font-size: var(--fs-p1);
   font-style: normal;
   font-weight: 500;
-  line-height: 110%; /* 17.6px */
+  line-height: 110%;
   text-transform: uppercase;
 }
 
 .text {
-  color: var(--Primary-01, #161616);
+  color: var(--Primary-01);
 
-  /* m/body */
-  font-family: "Plus Jakarta Sans";
-  font-size: 14px;
+  /* m/body → body */
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
   font-style: normal;
   font-weight: 400;
-  line-height: 120%; /* 16.8px */
+  line-height: 120%;
 }
 
 .content {
   display: flex;
   flex-direction: column;
   gap: 28px;
+}
+
+/* С планшета шапка в строку: заголовок слева, «/04» справа по низу */
+@media (min-width: 768px) {
+  .heading {
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 24px;
+  }
+}
+
+/*
+ * Десктоп (макет: блок 1840×1116):
+ * картинка 971×809 слева (на 41px заходит под правую колонку, сверху отступ 193px),
+ * правая колонка 910px — заголовок, список, подпись.
+ */
+@media (min-width: 1024px) {
+  .wrapper {
+    display: grid;
+    grid-template-columns: minmax(0, 930fr) minmax(0, 41fr) minmax(0, 869fr);
+    grid-template-rows: auto auto 1fr;
+    gap: 0;
+    /* Высота блока в макете — 1116px, на 12px больше колонки текста */
+    padding-bottom: calc(12 * var(--u));
+  }
+
+  /* Картинка и список становятся ячейками общей сетки */
+  .content {
+    display: contents;
+  }
+
+  .image {
+    grid-column: 1 / 3;
+    grid-row: 1 / 4;
+    align-self: start;
+    margin-top: calc(193 * var(--u));
+  }
+
+  .heading,
+  .list,
+  .wrapperText {
+    position: relative;
+    grid-column: 2 / 4;
+  }
+
+  .heading {
+    grid-row: 1;
+    margin-bottom: 0;
+  }
+
+  .list {
+    grid-row: 2;
+    gap: calc(64 * var(--u));
+    margin-top: calc(64 * var(--u));
+  }
+
+  .item {
+    padding: 8px 0 0;
+  }
+
+  .line {
+    background: rgba(22, 22, 22, 0.2);
+  }
+
+  .text {
+    white-space: pre-line;
+  }
+
+  .wrapperText {
+    grid-row: 3;
+    margin-top: calc(72 * var(--u));
+  }
 }

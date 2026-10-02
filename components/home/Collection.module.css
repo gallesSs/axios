@@ -12,28 +12,28 @@
 }
 
 .tag {
-  color: var(--Primary-01, #161616);
+  color: var(--Primary-01);
   text-align: right;
 
-  /* m/h3 */
-  font-family: Manrope;
-  font-size: 16px;
+  /* m/h3 → h3 */
+  font-family: var(--font-sans);
+  font-size: var(--fs-h3);
   font-style: normal;
   font-weight: 500;
-  line-height: 110%; /* 17.6px */
+  line-height: 110%;
   text-transform: uppercase;
   align-self: flex-end;
 }
 
 .title {
-  color: var(--Accent, #061025);
+  color: var(--Accent);
 
-  /* m/h1 */
-  font-family: Manrope;
-  font-size: 48px;
+  /* m/h1 → h1 */
+  font-family: var(--font-sans);
+  font-size: var(--fs-h1);
   font-style: normal;
   font-weight: 600;
-  line-height: 100%; /* 48px */
+  line-height: 100%;
   text-transform: uppercase;
 }
 
@@ -61,6 +61,8 @@
 .mediaInner {
   position: absolute;
   inset: 0;
+  /* Отдельное свойство scale: transform занят анимацией появления */
+  transition: scale 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .media img {
@@ -89,236 +91,199 @@
   opacity: 0;
 }
 
+/* Ховер: кадр мягко приближается, приглушение снимается */
+@media (hover: hover) {
+  .card:hover .mediaInner {
+    scale: 1.06;
+  }
+
+  .card:hover .media::after {
+    opacity: 0;
+  }
+}
+
 .cardBody {
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
 
-.cardTitle {
-  color: var(--Primary-01, #161616);
+/* Резерв под подпись нужен только на десктопе */
+.bodySizer {
+  display: none;
+}
 
-  /* m/h3 */
-  font-family: Manrope;
-  font-size: 16px;
+.cardTitle {
+  color: var(--Primary-01);
+
+  /* m/h3 → p1 */
+  font-family: var(--font-sans);
+  font-size: var(--fs-p1);
   font-style: normal;
   font-weight: 500;
-  line-height: 110%; /* 17.6px */
+  line-height: 110%;
   text-transform: uppercase;
   margin-top: 4px;
 }
-.cardText {
-  color: var(--Primary-01, #161616);
 
-  /* m/body */
-  font-family: "Plus Jakarta Sans";
-  font-size: 14px;
+.cardText {
+  color: var(--Primary-01);
+
+  /* m/body → body */
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
   font-style: normal;
   font-weight: 400;
-  line-height: 120%; /* 16.8px */
+  line-height: 120%;
 }
 
-.controls {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-top: 4px;
-}
-
-.counter {
-  display: flex;
-  align-items: baseline;
-  gap: 6px;
-  font-family: Manrope;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 110%;
-  color: var(--Primary-01, #161616);
-}
-
-.counterWindow {
-  display: inline-flex;
-  overflow: hidden;
-  height: 1.1em;
-}
-
-.counterTotal {
-  opacity: 0.4;
-}
-
-.progress {
-  position: relative;
-  flex: 1;
-  height: 1px;
-  background: rgba(22, 22, 22, 0.15);
-  overflow: hidden;
-}
-
-.progressBar {
-  position: absolute;
-  inset: 0;
-  background: var(--Accent, #061025);
-  transform: scaleX(0.2);
-  transform-origin: left;
-  transition: transform 0.15s linear;
-}
-
-.arrows {
-  display: flex;
-  gap: 8px;
-}
-
-.arrow {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: 1px solid rgba(22, 22, 22, 0.2);
-  display: grid;
-  place-items: center;
-  font-size: 16px;
-  color: var(--Primary-01, #161616);
-  cursor: pointer;
-  transition:
-    background-color 0.4s,
-    color 0.4s,
-    border-color 0.4s;
-}
-
-@media (hover: hover) {
-  .arrow:hover {
-    background: var(--Accent, #061025);
-    border-color: var(--Accent, #061025);
-    color: #fff;
-  }
-}
-
+/* Цвета и ховер — общие из RollButton */
 .button {
   padding: 13.5px 0;
-  width: 100%;
-  border: 1px solid var(--Accent, #061025);
+  border: 1px solid var(--Accent);
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
+  background: transparent;
+  color: var(--Accent);
+  --roll-fill: var(--Accent);
+  --roll-color: var(--Primary-02);
 
-  color: var(--Accent, #061025);
-
-  /* m/button text */
-  font-family: Manrope;
-  font-size: 14px;
+  /* m/button text → p1 */
+  font-family: var(--font-sans);
+  font-size: var(--fs-button);
   font-style: normal;
   font-weight: 500;
-  line-height: 110%; /* 15.4px */
+  line-height: 110%;
   text-transform: uppercase;
 }
 
-/* ---------- Hover: заливка снизу + перекат текста + пролёт стрелки ---------- */
-.button {
-  --ease: cubic-bezier(0.76, 0, 0.24, 1);
-  position: relative;
-  overflow: hidden;
-  isolation: isolate;
-  background: transparent;
-  cursor: pointer;
-  transition:
-    color 0.6s var(--ease),
-    transform 0.3s var(--ease);
-}
-
-/* Заливка поднимается снизу «волной» с скруглённым краем */
-.button::before {
-  content: "";
-  position: absolute;
-  left: -10%;
-  right: -10%;
-  top: 0;
-  height: 100%;
-  z-index: -1;
-  background: var(--Accent, #061025);
-  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
-  transform: translateY(101%);
-  transition:
-    transform 0.6s var(--ease),
-    border-radius 0.6s var(--ease);
-}
-
-.buttonLabel {
-  display: block;
-  overflow: hidden;
-  height: 1.1em;
-}
-
-/* Текст уезжает вверх, снизу приезжает копия */
-.buttonText {
-  position: relative;
-  display: block;
-  transition: transform 0.6s var(--ease);
-}
-
-.buttonText::after {
-  content: attr(data-text);
-  position: absolute;
-  top: 100%;
-  left: 0;
-}
-
-/* Стрелка улетает вправо, новая прилетает слева */
-.buttonIcon {
-  position: relative;
-  display: block;
-  width: 11px;
-  height: 9px;
-  overflow: hidden;
-}
-
-.buttonIcon svg {
-  position: absolute;
-  inset: 0;
-  transition: transform 0.6s var(--ease);
-}
-
-.buttonIcon svg:last-child {
-  transform: translateX(-150%);
-}
-
-@media (hover: hover) {
-  .button:hover {
-    color: #fff;
-  }
-
-  .button:hover::before {
-    transform: translateY(0);
-    border-radius: 0;
-  }
-
-  .button:hover .buttonText {
-    transform: translateY(-100%);
-  }
-
-  .button:hover .buttonIcon svg:first-child {
-    transform: translateX(150%);
-  }
-
-  .button:hover .buttonIcon svg:last-child {
-    transform: translateX(0);
-    transition-delay: 0.1s;
+/* С планшета шапка в строку: «/03» слева, заголовок справа */
+@media (min-width: 768px) {
+  .heading {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 48px;
   }
 }
 
-.button:active {
-  transform: scale(0.98);
-}
+/*
+ * Десктоп (макет 1920): шапка в строку, лента из квадратов 388px,
+ * активная карточка 640px по центру экрана — подпись над кадром 640×450.
+ */
+@media (min-width: 1024px) {
+  .wrapper {
+    gap: calc(32 * var(--u));
+  }
 
-.button:focus-visible {
-  outline: 2px solid var(--Accent, #061025);
-  outline-offset: 3px;
-}
+  .heading {
+    margin-bottom: calc(16 * var(--u));
+  }
 
-@media (prefers-reduced-motion: reduce) {
-  .button,
-  .button::before,
-  .buttonText,
-  .buttonIcon svg {
-    transition-duration: 0.01ms !important;
+  .slider {
+    --card: calc(388 * var(--u));
+    --card-active: calc(640 * var(--u));
+    --media-active: calc(450 * var(--u));
+    --body-gap: calc(8 * var(--u));
+    --gap: 20px;
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Невидимый резерв под подпись: все подписи в одной ячейке шириной активной карточки */
+  .bodySizer {
+    display: grid;
+    width: var(--card-active);
+    max-width: 100%;
+    margin: 0 auto var(--body-gap);
+    visibility: hidden;
+  }
+
+  .bodySizer > .cardBody {
+    grid-area: 1 / 1;
+    position: static;
+  }
+
+  /* Высота ленты постоянна — по активному кадру; карточки прижаты к низу */
+  .swiper {
+    height: var(--media-active);
+  }
+
+  /* Активная карточка всегда по центру: перед ней только неактивные, так что сдвиг считается точно.
+     Длительность тоже своя: Swiper обнуляет её на драге и ресайзе, и лента бы прыгала */
+  .swiper :global(.swiper-wrapper) {
+    align-items: flex-end;
+    transition: transform 0.9s var(--ease) !important;
+    transform: translate3d(
+      calc(50% - var(--active) * (var(--card) + var(--gap)) - var(--card-active) / 2),
+      0,
+      0
+    ) !important;
+  }
+
+  .card {
+    position: relative;
+    width: var(--card) !important;
+    height: auto !important;
+    cursor: pointer;
+    transition: width 0.9s var(--ease);
+  }
+
+  .card:global(.swiper-slide-active) {
+    width: var(--card-active) !important;
+    cursor: default;
+  }
+
+  .media {
+    aspect-ratio: auto;
+    height: var(--card);
+    transition: height 0.9s var(--ease);
+  }
+
+  .card:global(.swiper-slide-active) .media {
+    height: var(--media-active);
+  }
+
+  /* В макете неактивные карточки не приглушены, параллакс картинок отключён */
+  .media::after {
+    display: none;
+  }
+
+  .media img {
+    transform: none !important;
+  }
+
+  /* Подпись — только у активной карточки, над кадром; вне потока, место под неё держит .bodySizer */
+  .swiper .cardBody {
+    position: absolute;
+    left: 0;
+    bottom: calc(100% + var(--body-gap));
+    width: var(--card-active);
+    opacity: 0 !important;
+    transform: none !important;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .card:global(.swiper-slide-active) .cardBody {
+    opacity: 1 !important;
+    pointer-events: auto;
+    transition: opacity 0.6s ease 0.3s;
+  }
+
+  .cardTitle {
+    margin-top: 0;
+  }
+
+  .button {
+    width: fit-content;
+    padding: max(13.5px, calc(20 * var(--u))) max(20px, calc(22 * var(--u)));
+    gap: max(8px, calc(4 * var(--u)));
+  }
+
+  .button svg {
+    width: max(11px, calc(18 * var(--u)));
+    height: auto;
   }
 }

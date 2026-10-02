@@ -51,7 +51,7 @@ export default function BurgerMenu() {
                                 href=""
                                 variants={itemVariants}
                             >
-                                <span>{String(i + 1).padStart(2, '0')}</span> <span>/</span> <span>{label}</span>
+                                <span>{String(i + 1).padStart(2, '0')}</span>{'   '}<span>/</span>{'   '}<span>{label}</span>
                             </motion.a>
                         </li>
                     ))}

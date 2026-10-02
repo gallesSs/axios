@@ -1,0 +1,87 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.title {
+    color: var(--Primary-02);
+
+    /* m/h1 → h1 */
+    font-family: var(--font-sans);
+    font-size: var(--fs-h1);
+    font-style: normal;
+    font-weight: 600;
+    line-height: 100%;
+    text-transform: uppercase;
+}
+
+.text {
+    color: var(--Primary-02);
+
+    /* m/body → body */
+    font-family: var(--font-body);
+    font-size: var(--fs-body);
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+}
+
+.button {
+    margin-top: 13px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    color: var(--Primary-01);
+
+    /* m/button text → p1 */
+    font-family: var(--font-sans);
+    font-size: var(--fs-button);
+    font-style: normal;
+    font-weight: 500;
+    line-height: 110%;
+    text-transform: uppercase;
+
+    padding: 13.5px 0;
+    background: var(--Primary-02);
+    --roll-fill: var(--Accent);
+    --roll-color: var(--Primary-02);
+}
+
+.cta {
+    padding: 40px 0 52px 0;
+    background: var(--Primary-01);
+}
+
+/* Десктоп (макет: правая половина 960×800): заголовок и текст сверху, кнопка прижата вниз */
+@media (min-width: 1024px) {
+    .cta {
+        display: flex;
+        flex-direction: column;
+        padding: var(--gutter) 0;
+    }
+
+    .wrapper {
+        flex: 1;
+        gap: calc(12 * var(--u));
+    }
+
+    /* Кнопка в обёртке RollButton — её и прижимаем к низу */
+    .wrapper > :last-child {
+        margin-top: auto;
+        padding-top: 32px;
+    }
+
+    .button {
+        width: fit-content;
+        margin-top: 0;
+        padding: max(13.5px, calc(20 * var(--u))) max(20px, calc(22 * var(--u)));
+        gap: max(8px, calc(4 * var(--u)));
+    }
+
+    .button svg {
+        width: max(14px, calc(24 * var(--u)));
+        height: auto;
+    }
+}

@@ -1,4 +1,75 @@
+/*
+ * Мобилка: 69×20, линии 1px с шагом 8px; крестик по центру, линии 29.4px под ±40°.
+ * Десктоп (макет 1920): 135×24, линии 2px с шагом 12px; крестик 60×50 прижат вправо и к верху.
+ */
 .button {
+    --w: 69px;
+    --step: 8px;
+    --stroke: 1px;
+    /* Длина линии крестика относительно ширины и его смещение от центра кнопки */
+    --x-scale: 0.4265;
+    --x-dx: 0px;
+    --x-dy: 0px;
+    --ease: cubic-bezier(0.65, 0, 0.35, 1);
+
+    position: relative;
     flex-shrink: 0;
+    width: var(--w);
+    height: calc(var(--step) * 2 + 4px);
     cursor: pointer;
+}
+
+@media (min-width: 1024px) {
+    .button {
+        --w: max(69px, calc(135 * var(--u)));
+        --step: max(8px, calc(12 * var(--u)));
+        --x-scale: 0.579;
+        /* Ширина крестика = 0.443·w, высота = 0.372·w (cos/sin 40°) */
+        --x-dx: calc(var(--w) * 0.2783);
+        --x-dy: calc(var(--w) * 0.186 - var(--step));
+        height: calc(var(--step) * 2);
+    }
+}
+
+@media (min-width: 1440px) {
+    .button {
+        --stroke: 2px;
+    }
+}
+
+.line {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: var(--stroke);
+    background: currentColor;
+    transition:
+        transform 400ms var(--ease),
+        opacity 300ms ease;
+}
+
+.line:nth-child(1) {
+    transform: translateY(calc(-50% - var(--step)));
+}
+
+.line:nth-child(2) {
+    transform: translateY(-50%);
+}
+
+.line:nth-child(3) {
+    transform: translateY(calc(-50% + var(--step)));
+}
+
+.open .line:nth-child(1) {
+    transform: translate(var(--x-dx), calc(-50% + var(--x-dy))) rotate(40deg) scaleX(var(--x-scale));
+}
+
+.open .line:nth-child(2) {
+    transform: translateY(-50%) scaleX(0);
+    opacity: 0;
+}
+
+.open .line:nth-child(3) {
+    transform: translate(var(--x-dx), calc(-50% + var(--x-dy))) rotate(-40deg) scaleX(var(--x-scale));
 }

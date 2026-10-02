@@ -1,0 +1,22 @@
+.split {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 1024px) {
+  .split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* Высота пары в макете — 800px; меньше контента не сожмётся */
+    min-height: calc(800 * var(--u));
+  }
+
+  .split > section {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .split > section > * {
+    flex: 1;
+  }
+}

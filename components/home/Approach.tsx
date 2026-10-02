@@ -27,7 +27,7 @@ function Approach() {
     <div className={`container ${s.wrapper}`}>
       <div className={s.heading}>
         <ScrambleText text="/02" className={s.tag} />
-        <StretchLetters lines={["OUR", "APPROACH"]} className={s.title} />
+        <StretchLetters lines={["OUR", "APPROACH"]} className={s.title} inline />
       </div>
       <ApproachList steps={STEPS} />
     </div>

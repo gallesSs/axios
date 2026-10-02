@@ -17,8 +17,10 @@ export default function LineReveal({ children, className, delay = 0, onMount }: 
   return (
     // Видимость отслеживаем на маске: сам текст спрятан за overflow,
     // и IntersectionObserver считает его невидимым.
+    // Запас снизу под выносные элементы компенсирован отрицательным отступом —
+    // на раскладку маска не влияет, строки стоят как в макете.
     <motion.span
-      style={{ display: "block", overflow: "hidden", paddingBottom: "0.08em" }}
+      style={{ display: "block", overflow: "hidden", paddingBottom: "0.08em", marginBottom: "-0.08em" }}
       initial="hidden"
       {...(onMount
         ? { animate: "visible" }

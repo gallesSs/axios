@@ -1,7 +1,7 @@
 /** Логотип инлайном, чтобы цвет задавался через currentColor. */
-export default function Logo() {
+export default function Logo({ className }: { className?: string }) {
   return (
-    <svg width="72" height="13" viewBox="0 0 72 13" fill="none" role="img" aria-label="AXIS">
+    <svg className={className} width="72" height="13" viewBox="0 0 72 13" fill="none" role="img" aria-label="AXIS">
       <path
         fillRule="evenodd"
         clipRule="evenodd"

@@ -1,0 +1,105 @@
+.button {
+  --ease: cubic-bezier(0.76, 0, 0.24, 1);
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  isolation: isolate;
+  cursor: pointer;
+  transition:
+    color 0.6s var(--ease),
+    transform 0.3s var(--ease);
+}
+
+/* Заливка поднимается снизу «волной» со скруглённым краем */
+.button::before {
+  content: "";
+  position: absolute;
+  left: -10%;
+  right: -10%;
+  top: 0;
+  height: 100%;
+  z-index: -1;
+  background: var(--roll-fill, currentColor);
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  transform: translateY(101%);
+  transition:
+    transform 0.6s var(--ease),
+    border-radius 0.6s var(--ease);
+}
+
+.label {
+  display: block;
+  overflow: hidden;
+  height: 1.1em;
+}
+
+/* Текст уезжает вверх, снизу приезжает копия */
+.text {
+  position: relative;
+  display: block;
+  transition: transform 0.6s var(--ease);
+}
+
+.text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 100%;
+  left: 0;
+}
+
+/* Две стрелки в одной ячейке: первая улетает вправо, вторая прилетает слева */
+.icon {
+  display: grid;
+  overflow: hidden;
+}
+
+.icon > svg {
+  grid-area: 1 / 1;
+  transition: transform 0.6s var(--ease);
+}
+
+.icon > svg:last-child {
+  transform: translateX(-150%);
+}
+
+@media (hover: hover) {
+  .button:hover {
+    color: var(--roll-color, inherit);
+  }
+
+  .button:hover::before {
+    transform: translateY(0);
+    border-radius: 0;
+  }
+
+  .button:hover .text {
+    transform: translateY(-100%);
+  }
+
+  .button:hover .icon > svg:first-child {
+    transform: translateX(150%);
+  }
+
+  .button:hover .icon > svg:last-child {
+    transform: translateX(0);
+    transition-delay: 0.1s;
+  }
+}
+
+.button:active {
+  transform: scale(0.98);
+}
+
+.button:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button,
+  .button::before,
+  .text,
+  .icon > svg {
+    transition-duration: 0.01ms !important;
+  }
+}
