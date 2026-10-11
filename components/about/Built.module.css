@@ -1,0 +1,221 @@
+.top {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.tag {
+    color: var(--Primary-01, #161616);
+
+    /* m/h3 → h3 */
+    font-family: var(--font-sans);
+    font-size: var(--fs-h3);
+    font-style: normal;
+    font-weight: 500;
+    line-height: 110%;
+    /* 17.6px */
+    text-transform: uppercase;
+}
+
+.title {
+    margin-bottom: 8px;
+    color: var(--Accent, #061025);
+
+    /* m/h1 → h1 */
+    font-family: var(--font-sans);
+    font-size: var(--fs-h1);
+    font-style: normal;
+    font-weight: 600;
+    line-height: 100%;
+    /* 48px */
+    text-transform: uppercase;
+}
+
+.text {
+    color: var(--Primary-01, #161616);
+
+    /* m/body → body */
+    font-family: var(--font-body);
+    font-size: var(--fs-body);
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+    /* 16.8px */
+}
+
+
+.card {
+    position: relative;
+    height: 220px;
+    width: 100%;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    isolation: isolate;
+    overflow: hidden;
+    transform-origin: 50% 0%;
+
+    border: 0.5px solid var(--Primary-02, #FFF);
+    background: var(--Primary-01, #161616);
+}
+
+/* Блик за курсором (только мышь) */
+.card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: radial-gradient(
+        circle at var(--mx, 50%) var(--my, 50%),
+        rgba(255, 255, 255, 0.14),
+        transparent 45%
+    );
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+
+@media (hover: hover) {
+    .card:hover::before {
+        opacity: 1;
+    }
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    perspective: 1200px;
+}
+
+.cardTitle {
+    color: var(--Primary-02, #FFF);
+
+    /* m/h3 → h3 */
+    font-family: var(--font-sans);
+    font-size: var(--fs-h3);
+    font-style: normal;
+    font-weight: 500;
+    line-height: 110%;
+    /* 17.6px */
+    text-transform: uppercase;
+}
+
+.cardText {
+    color: var(--Primary-02, #FFF);
+
+    /* m/body → body */
+    font-family: var(--font-body);
+    font-size: var(--fs-body);
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+    /* 16.8px */
+}
+
+.num {
+    color: var(--Primary-02, #FFF);
+
+    /* m/h3 → h3 */
+    font-family: var(--font-sans);
+    font-size: var(--fs-h3);
+    font-style: normal;
+    font-weight: 500;
+    line-height: 110%;
+    /* 17.6px */
+    text-transform: uppercase;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.textItem {
+    color: var(--Primary-01, #161616);
+
+    /* m/body → body */
+    font-family: var(--font-body);
+    font-size: var(--fs-body);
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+    /* 16.8px */
+}
+
+.texts {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Планшет: карточки выше, тексты по ширине */
+@media (min-width: 768px) {
+    .card {
+        height: 300px;
+        padding: 20px;
+    }
+
+    .text,
+    .textItem,
+    .cardText {
+        text-align: justify;
+    }
+}
+
+/*
+ * Десктоп (макет 1841×820): слева колонка 758 — шапка сверху, два абзаца прижаты к низу;
+ * справа (через 154) сетка 2×2 из карточек 464×410.
+ */
+@media (min-width: 1024px) {
+    .container {
+        display: grid;
+        grid-template-columns: minmax(0, 758fr) minmax(0, 929fr);
+        grid-template-rows: auto 1fr;
+        column-gap: calc(154 * var(--u));
+        row-gap: 32px;
+    }
+
+    .top {
+        grid-column: 1;
+        grid-row: 1;
+        gap: 0;
+    }
+
+    .tag {
+        margin-bottom: calc(24 * var(--u));
+    }
+
+    .title {
+        margin-bottom: calc(20 * var(--u));
+    }
+
+    .list {
+        grid-column: 2;
+        grid-row: 1 / -1;
+    }
+
+    .card {
+        height: max(300px, calc(410 * var(--u)));
+        padding: max(16px, calc(20 * var(--u)));
+    }
+
+    .content {
+        gap: max(8px, calc(12 * var(--u)));
+    }
+
+    .texts {
+        grid-column: 1;
+        grid-row: 2;
+        align-self: end;
+    }
+}

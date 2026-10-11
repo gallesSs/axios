@@ -1,0 +1,156 @@
+.tag {
+    color: var(--Primary-01, #161616);
+
+    /* m/h3 → h3 */
+    font-family: var(--font-sans);
+    font-size: var(--fs-h3);
+    font-style: normal;
+    font-weight: 500;
+    line-height: 110%;
+    /* 17.6px */
+    text-transform: uppercase;
+}
+
+.title {
+    color: var(--Accent, #061025);
+
+    /* m/h1 → h1; буквы не переносятся (≈5.9em) — на экранах уже 375 кегль уменьшается */
+    font-family: var(--font-sans);
+    font-size: min(var(--fs-h1), calc((100vw - 2 * var(--gutter)) / 6));
+    font-style: normal;
+    font-weight: 600;
+    line-height: 100%;
+    /* 48px */
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.top {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+/* Мобилка 375×230 (в контейнере — по ширине, с теми же пропорциями) */
+.image {
+    width: 100%;
+    aspect-ratio: 375 / 230;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.boldText {
+    color: var(--Primary-01, #161616);
+
+    /* m/h3 → p1 */
+    font-family: var(--font-sans);
+    font-size: var(--fs-p1);
+    font-style: normal;
+    font-weight: 500;
+    line-height: 110%;
+    /* 17.6px */
+    text-transform: uppercase;
+}
+
+.text {
+    color: var(--Primary-01, #161616);
+
+    /* m/body → body */
+    font-family: var(--font-body);
+    font-size: var(--fs-body);
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+    /* 16.8px */
+}
+
+/* Планшет: два абзаца рядом, как на десктопе (535 : 233) */
+@media (min-width: 768px) {
+    .info {
+        flex-direction: row;
+        gap: 28px;
+    }
+
+    .boldText {
+        flex: 535 1 0;
+        text-align: justify;
+    }
+
+    .text {
+        flex: 233 1 0;
+        text-align: justify;
+    }
+}
+
+/*
+ * Десктоп (макет 1840×634): слева колонка 799 (/02 → 24 → заголовок → 8 → абзацы → 40 → аккордеон),
+ * справа картинка 909×557, прижата к низу.
+ */
+@media (min-width: 1024px) {
+    .container {
+        display: grid;
+        grid-template-columns: minmax(0, 799fr) minmax(0, 909fr);
+        grid-template-rows: auto auto 1fr;
+        column-gap: calc(132 * var(--u));
+        row-gap: 0;
+    }
+
+    .top {
+        gap: calc(24 * var(--u));
+    }
+
+    .title {
+        color: var(--Primary-01);
+    }
+
+    /* Верх картинки — на уровне заголовка (под «/02» + 24), чтобы при раскрытии пункта она не прыгала */
+    .image {
+        grid-column: 2;
+        grid-row: 1 / span 3;
+        align-self: start;
+        margin-top: calc(var(--fs-h3) * 1.1 + 24 * var(--u));
+        aspect-ratio: 909 / 557;
+    }
+
+    /* Абзацы рядом (535 : 233) только у ширин, близких к макету, — ниже правый становится «столбиком» */
+    .info {
+        flex-direction: column;
+        gap: 12px;
+        margin-top: calc(8 * var(--u));
+    }
+
+    .boldText,
+    .text {
+        flex: none;
+    }
+
+    .dropdowns {
+        margin-top: max(24px, calc(40 * var(--u)));
+    }
+}
+
+@media (min-width: 1600px) {
+    .info {
+        flex-direction: row;
+        gap: calc(28 * var(--u));
+    }
+
+    .boldText {
+        flex: 535 1 0;
+    }
+
+    .text {
+        flex: 233 1 0;
+    }
+}

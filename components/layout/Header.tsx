@@ -81,7 +81,7 @@ export default function Header() {
                 <BurgerButton isOpen={isOpen} onClick={() => setIsOpen((v) => !v)} />
             </div>
             <AnimatePresence>
-                {isOpen && <BurgerMenu key="burger-menu" />}
+                {isOpen && <BurgerMenu key="burger-menu" onNavigate={() => setIsOpen(false)} />}
             </AnimatePresence>
         </motion.header>
     )

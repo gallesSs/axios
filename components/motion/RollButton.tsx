@@ -10,18 +10,21 @@ type Props = {
   icon: ReactNode;
   /** Внешний вид кнопки (цвета, отступы, шрифт). Цвета ховера — через --roll-fill / --roll-color */
   className?: string;
+  /** Если задан — рендерится ссылка вместо кнопки */
+  href?: string;
 };
 
 /**
  * Появление: кнопка раскрывается от центра в стороны.
  * Ховер: заливка поднимается волной, текст перекатывается, стрелка пролетает насквозь.
  */
-export default function RollButton({ text, icon, className }: Props) {
+export default function RollButton({ text, icon, className, href }: Props) {
+  const Tag = href === undefined ? motion.button : motion.a;
   return (
     // Триггер — обёртка без clip-path
     <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 1 }}>
-      <motion.button
-        type="button"
+      <Tag
+        {...(href === undefined ? { type: "button" as const } : { href })}
         className={`${s.button} ${className ?? ""}`}
         variants={{
           hidden: { clipPath: "inset(0% 50% 0% 50%)" },
@@ -38,7 +41,7 @@ export default function RollButton({ text, icon, className }: Props) {
           {icon}
           {icon}
         </span>
-      </motion.button>
+      </Tag>
     </motion.div>
   );
 }

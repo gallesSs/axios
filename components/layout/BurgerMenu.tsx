@@ -1,5 +1,6 @@
 'use client'
 
+import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { motion, type Variants } from "motion/react"
 import { EASE_IN_OUT, EASE_OUT_EXPO } from "@/components/motion/config"
@@ -25,6 +26,8 @@ const itemVariants: Variants = {
     exit: { y: "-115%", rotate: -3, transition: { duration: 0.4, ease: EASE_IN_OUT } },
 }
 
+const MotionLink = motion.create(Link)
+
 const LINKS = [
     { href: "/", label: "HOME" },
     { href: "/projects", label: "PROJECTS" },
@@ -32,7 +35,11 @@ const LINKS = [
     { href: "/contact", label: "CONTACT" },
 ]
 
-export default function BurgerMenu() {
+type Props = {
+    onNavigate: () => void
+}
+
+export default function BurgerMenu({ onNavigate }: Props) {
     const pathname = usePathname()
     return (
         <motion.div
@@ -46,13 +53,14 @@ export default function BurgerMenu() {
                 <motion.ul className={styles.list}>
                     {LINKS.map(({ href, label }, i) => (
                         <li key={href} className={styles.item}>
-                            <motion.a
+                            <MotionLink
                                 className={`${styles.link} ${pathname === href ? styles.active : ''}`}
-                                href=""
+                                href={href}
+                                onClick={onNavigate}
                                 variants={itemVariants}
                             >
                                 <span>{String(i + 1).padStart(2, '0')}</span>{'   '}<span>/</span>{'   '}<span>{label}</span>
-                            </motion.a>
+                            </MotionLink>
                         </li>
                     ))}
                 </motion.ul>

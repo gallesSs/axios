@@ -96,6 +96,34 @@
   color: var(--Primary-01);
 }
 
+.itemTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.icon {
+  position: relative;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+}
+
+.icon svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* About: текст m/body (Plus Jakarta Sans 14/120%) */
+.withIcon .itemText {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: 120%;
+}
+
 .body {
   height: 0;
   overflow: hidden;
@@ -154,5 +182,47 @@
     font-family: var(--font-body);
     font-size: var(--fs-body);
     line-height: 120%;
+  }
+}
+
+/*
+ * About, десктоп (макет: плашки 799×78, открытая — 799×130):
+ * закрытая — заголовок и стрелка в строку; открытая — сверху крестик (40 + 12),
+ * описание стоит справа от заголовка по базовой линии (фон в макете — белый 50% на белом = белый).
+ */
+@media (min-width: 1024px) {
+  .withIcon .item {
+    --icon: max(20px, calc(40 * var(--u)));
+    display: flex;
+    align-items: baseline;
+    gap: max(8px, calc(12 * var(--u)));
+    padding: calc(12px + var(--open, 0) * (var(--icon) + max(8px, calc(12 * var(--u))))) 12px 12px;
+    box-shadow: inset 0 0 0 1px var(--Primary-01);
+  }
+
+  .withIcon .itemTop {
+    display: contents;
+  }
+
+  /* Иконка не двигается: закрыта — по центру строки заголовка, открыта — в верхнем ряду */
+  .withIcon .icon {
+    position: absolute;
+    top: calc(12px + (1 - var(--open, 0)) * (var(--fs-h3) * 1.1 - var(--icon)) / 2);
+    right: 12px;
+    width: var(--icon);
+    height: var(--icon);
+  }
+
+  /* Текст в строке с заголовком: закрытым не занимает высоту (если переносится на узком экране),
+     раскрывается вместе с --open; clip, а не hidden — чтобы сохранялась базовая линия */
+  .withIcon .body {
+    height: auto !important;
+    max-height: calc(var(--open, 0) * 6em);
+    overflow: clip;
+    min-width: 0;
+  }
+
+  .withIcon .itemText {
+    padding-top: 0;
   }
 }

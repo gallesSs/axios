@@ -1,0 +1,210 @@
+.container {
+    padding-top: 76px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.heroTop {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.tag {
+    color: var(--Primary-01);
+
+    /* m/h3 → p1 */
+    font-family: var(--font-sans);
+    font-size: var(--fs-p1);
+    font-style: normal;
+    font-weight: 500;
+    line-height: 110%;
+    /* 17.6px */
+    text-transform: uppercase;
+}
+
+.title {
+    display: block;
+    color: var(--Accent, #061025);
+    font-family: var(--font-sans);
+    /* 45px по макету; в браузере «THAT BELONGS.» ≈ 7.4em — на узких экранах уменьшаем, чтобы плашка влезала */
+    font-size: min(45px, calc((100vw - 2 * var(--gutter) - 8px) / 7.45));
+    font-style: normal;
+    font-weight: 400;
+    line-height: 100%;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.titleBlack {
+    display: block;
+    color: var(--Primary-02, #FFF);
+    font-family: var(--font-sans);
+    /* 45px по макету; в браузере «THAT BELONGS.» ≈ 7.4em — на узких экранах уменьшаем, чтобы плашка влезала */
+    font-size: min(45px, calc((100vw - 2 * var(--gutter) - 8px) / 7.45));
+    font-style: normal;
+    font-weight: 400;
+    line-height: 100%;
+    text-transform: uppercase;
+    white-space: nowrap;
+    padding: 3px 4px;
+    background: var(--Primary-01, #161616);
+    /* Плашка на всю ширину колонки (как в макете), но не уже собственного текста */
+    min-width: max-content;
+}
+
+.titleWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: stretch;
+}
+
+/*
+ * Маска одной буквы: снизу запас под выносные элементы, на раскладку не влияет.
+ * Трекинг — отрицательным отступом маски, а не letter-spacing: иначе маска обрезала бы глиф справа.
+ */
+.mask {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: top;
+    padding-bottom: 0.06em;
+    margin-bottom: -0.06em;
+    margin-right: var(--tracking, 0);
+}
+
+.letter {
+    display: inline-block;
+    white-space: pre;
+    transform-origin: 0% 100%;
+}
+
+.text {
+    color: var(--Primary-01, #161616);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 110%;
+    /* 17.6px */
+    text-transform: uppercase;
+}
+
+.word {
+    display: inline-block;
+}
+
+.list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    row-gap: 8px;
+}
+
+.item {
+    color: var(--Primary-01, #161616);
+    font-family: var(--font-body);
+    font-size: var(--fs-body);
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+    /* 16.8px */
+}
+
+.itemInner {
+    display: block;
+}
+
+/*
+ * Планшет: композиция мобилки, но заголовок крупный — «ARCHITECTURE» на всю ширину контейнера,
+ * плашка тянется на всю ширину (как в макете), подписи в одну строку.
+ */
+@media (min-width: 768px) {
+    .container {
+        container-type: inline-size;
+        padding-top: 96px;
+        gap: 32px;
+    }
+
+    .heroTop {
+        gap: 24px;
+    }
+
+    .titleWrapper {
+        gap: 2.4cqw;
+    }
+
+    .title,
+    .titleBlack {
+        /* «ARCHITECTURE» при -4% трекинга ≈ 6.9em — занимает ~90% ширины */
+        font-size: 13cqw;
+        --tracking: -0.04em;
+    }
+
+    .titleBlack {
+        padding: 1.2cqw;
+    }
+
+    .text {
+        max-width: 520px;
+        margin-left: auto;
+        font-size: 20px;
+        text-align: justify;
+    }
+}
+
+/*
+ * Десктоп (макет 1840×490): слева заголовок 1132, справа абзац 600 прижат к низу,
+ * между ними 108; «/ABOUT US» сверху (49 до заголовка), подписи снизу (24).
+ * Размеры заголовка — от ширины контейнера (cqw), чтобы колонка 1132:600 не переполнялась.
+ */
+@media (min-width: 1024px) {
+    .container {
+        display: grid;
+        grid-template-columns: minmax(0, 1132fr) minmax(0, 600fr);
+        column-gap: calc(108 / 1840 * 100cqw);
+        row-gap: 0;
+        padding-top: max(76px, calc(104 * var(--u)));
+    }
+
+    .heroTop {
+        display: contents;
+    }
+
+    .tag {
+        grid-column: 1 / -1;
+        margin-bottom: calc(49 * var(--u));
+    }
+
+    .titleWrapper {
+        grid-column: 1;
+        gap: calc(24 / 1840 * 100cqw);
+    }
+
+    .title,
+    .titleBlack {
+        /* 164px на 1840px контейнера */
+        font-size: calc(164 / 1840 * 100cqw);
+    }
+
+    .titleBlack {
+        padding: calc(10 / 1840 * 100cqw);
+    }
+
+    .text {
+        grid-column: 2;
+        align-self: end;
+        max-width: none;
+        margin: 0;
+
+        /* m/h3 → h3 */
+        font-size: var(--fs-h3);
+    }
+
+    .list {
+        grid-column: 1 / -1;
+        flex-wrap: nowrap;
+        margin-top: calc(24 * var(--u));
+    }
+}

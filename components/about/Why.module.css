@@ -1,0 +1,358 @@
+.title {
+    display: flex;
+    color: var(--Primary-02, #FFF);
+
+    /* m/h1 → h1 */
+    font-family: var(--font-sans);
+    font-size: var(--fs-h1);
+    font-style: normal;
+    font-weight: 600;
+    line-height: 100%;
+    /* 48px */
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+/* Маска буквы заголовка: снизу запас под выносные элементы, на раскладку не влияет */
+.mask {
+    display: inline-block;
+    overflow: hidden;
+    padding-bottom: 0.08em;
+    margin-bottom: -0.08em;
+}
+
+.letter {
+    display: inline-block;
+    white-space: pre;
+}
+
+.tag {
+    color: var(--Primary-02, #FFF);
+
+    /* m/h3 → h3 */
+    font-family: var(--font-sans);
+    font-size: var(--fs-h3);
+    font-style: normal;
+    font-weight: 500;
+    line-height: 110%;
+    /* 17.6px */
+    text-transform: uppercase;
+}
+
+.text {
+    color: var(--Primary-02, #FFF);
+
+    /* m/body → body */
+    font-family: var(--font-body);
+    font-size: var(--fs-body);
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+    /* 16.8px */
+}
+
+/*
+ * Дорожка скролла: секция закреплена, пока проходим интро (раскрытие кадра из коллажа)
+ * и все слайды. Отрезки задаются невидимыми маркерами — по ним считается прогресс.
+ */
+.track {
+    --intro: 100svh;
+    position: relative;
+    height: calc(100svh + var(--intro) + 4 * 60svh);
+}
+
+.introRange,
+.slidesRange {
+    position: absolute;
+    left: 0;
+    width: 1px;
+    pointer-events: none;
+    visibility: hidden;
+}
+
+.introRange {
+    top: 0;
+    height: calc(100svh + var(--intro));
+}
+
+.slidesRange {
+    top: var(--intro);
+    bottom: 0;
+}
+
+.wrapper {
+    position: sticky;
+    top: 0;
+    height: 100svh;
+    overflow: hidden;
+    isolation: isolate;
+    background: var(--Primary-02);
+}
+
+/* Коллаж вокруг «окна»: фото и подписи, разлетаются при раскрытии */
+.collage {
+    --collage-unit: 1vw;
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.collageItem {
+    position: absolute;
+    will-change: transform, opacity, filter;
+}
+
+.collageImg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.collageText {
+    display: block;
+    color: var(--Primary-01);
+    font-family: var(--font-sans);
+    font-size: var(--fs-body);
+    font-weight: 500;
+    line-height: 110%;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+/* Мобилка: фото крупнее, часть элементов скрыта */
+@media (max-width: 767px) {
+    .collage {
+        --collage-unit: 2vw;
+    }
+
+    .collageWide {
+        display: none;
+    }
+}
+
+/* Сам блок — «окно», которое раскрывается из центра на весь экран */
+.stage {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px 0 40px 0px;
+    isolation: isolate;
+    background: var(--Primary-01);
+    will-change: clip-path;
+}
+
+/* Слой въезда: кадр «отъезжает» из зума, пока раскрывается окно */
+.frame {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    will-change: transform;
+}
+
+/* Фон из макета (фото + затемнение 20%), чуть уезжает и «отдаляется» под скролл */
+.bg {
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("/about/why.jpg");
+    background-position: left;
+    background-repeat: no-repeat;
+    background-size: cover;
+    will-change: transform;
+}
+
+/* Вертикальные линии сетки — только на десктопе */
+.gridLine {
+    display: none;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.top {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.headingWrapper {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.row {
+    position: relative;
+    padding: 16px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.20);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.20);
+}
+
+.tabs {
+    display: flex;
+    gap: 32px;
+    width: max-content;
+}
+
+.tab {
+    color: var(--Primary-02, #FFF);
+
+    /* m/h3 → h3 */
+    font-family: var(--font-sans);
+    font-size: var(--fs-h3);
+    font-style: normal;
+    font-weight: 500;
+    line-height: 110%;
+    /* 17.6px */
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+/* Прогресс по нижней линии */
+.progress {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 1px;
+    background: var(--Primary-02, #FFF);
+    transform-origin: left;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.slides {
+    display: grid;
+    padding-right: 20px;
+}
+
+.slide {
+    color: var(--Primary-02, #FFF);
+
+    /* m/body → body */
+    font-family: var(--font-body);
+    font-size: var(--fs-body);
+    font-style: normal;
+    font-weight: 600;
+    line-height: 120%;
+    /* 16.8px */
+}
+
+.slides > .slide {
+    grid-area: 1 / 1;
+}
+
+.sizer {
+    visibility: hidden;
+    white-space: pre-line;
+}
+
+.line {
+    display: block;
+}
+
+.word {
+    display: inline-block;
+    transform-origin: left bottom;
+    will-change: transform, filter, opacity;
+}
+
+/* Планшет: текст слайда не растягивается на всю ширину */
+@media (min-width: 768px) {
+    .container {
+        gap: 48px;
+    }
+
+    .text {
+        max-width: 560px;
+    }
+
+    .tabs {
+        gap: 48px;
+    }
+
+    .slides {
+        max-width: 480px;
+        margin-left: auto;
+        padding-right: 0;
+    }
+}
+
+/*
+ * Десктоп (макет 1920×944): шапка сверху (отступ 64), колонка 593.
+ * Табы начинаются там, где кончается колонка (x 633), под ними линия на всю ширину (y 480),
+ * текст слайда 445 стоит под вторым табом (x 1209, y 509).
+ * Две вертикальные линии сетки (x 1260 и 1745) от y 348 до низа.
+ */
+@media (min-width: 1024px) {
+    .stage {
+        --col: calc(593 * var(--u));
+        justify-content: flex-start;
+        padding: calc(64 * var(--u)) 0 0;
+    }
+
+    .gridLine {
+        display: block;
+        position: absolute;
+        top: calc(348 * var(--u));
+        bottom: 0;
+        width: 1px;
+        background: rgba(255, 255, 255, 0.20);
+        transform-origin: 50% 0%;
+    }
+
+    .gridLineLeft {
+        left: calc(1260 * var(--u));
+    }
+
+    .gridLineRight {
+        left: calc(1745 * var(--u));
+    }
+
+    .container {
+        gap: calc(104 * var(--u));
+    }
+
+    .top {
+        gap: calc(24 * var(--u));
+    }
+
+    .text {
+        width: var(--col);
+        max-width: none;
+        text-align: justify;
+    }
+
+    .content {
+        gap: calc(29 * var(--u));
+    }
+
+    .row {
+        padding: 0 0 calc(31 * var(--u)) var(--col);
+        border-top: 0;
+    }
+
+    .tabs {
+        gap: max(48px, calc(100 * var(--u)));
+    }
+
+    .slides {
+        width: max(280px, calc(445 * var(--u)));
+        max-width: none;
+        margin-left: calc(var(--col) + 576 * var(--u));
+    }
+
+    .slide {
+        text-align: justify;
+    }
+}

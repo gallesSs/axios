@@ -1,0 +1,171 @@
+.wrapper {
+    position: relative;
+    isolation: isolate;
+    padding: 40px 0;
+}
+
+/* Слой фона: обрезается рамкой при въезде, внутри — фото с параллаксом */
+.frame {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    background: var(--Primary-01);
+}
+
+.bg {
+    position: absolute;
+    inset: -10% 0;
+    background-image: url("/about/form.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    will-change: transform;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+}
+
+.heading {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.title {
+    color: #FFF;
+
+    /* m/h1 → h1 */
+    font-family: var(--font-sans);
+    font-size: var(--fs-h1);
+    font-style: normal;
+    font-weight: 600;
+    line-height: 100%;
+    /* 48px */
+    text-transform: uppercase;
+}
+
+.tag {
+    align-self: flex-end;
+    color: #FFF;
+
+    /* m/h3 → h3 */
+    font-family: var(--font-sans);
+    font-size: var(--fs-h3);
+    font-style: normal;
+    font-weight: 500;
+    line-height: 110%;
+    text-transform: uppercase;
+}
+
+.text {
+    color: #FFF;
+
+    /* m/h3 → p1 */
+    font-family: var(--font-sans);
+    font-size: var(--fs-p1);
+    font-style: normal;
+    font-weight: 500;
+    line-height: 110%;
+    /* 17.6px */
+    text-transform: uppercase;
+}
+
+.btn {
+    color: #061025;
+
+    /* m/button text → p1 */
+    font-family: var(--font-sans);
+    font-size: var(--fs-button);
+    font-style: normal;
+    font-weight: 500;
+    line-height: 110%;
+    /* 15.4px */
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 13.5px 0;
+    width: 100%;
+    background: #FFF;
+    border: 0;
+    --roll-fill: var(--Accent);
+    --roll-color: var(--Primary-02);
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* Планшет: блок с текстом и кнопкой — справа, 520 */
+@media (min-width: 768px) {
+    .wrapper {
+        padding: 80px 0 40px;
+    }
+
+    .content {
+        align-self: flex-end;
+        width: min(520px, 100%);
+    }
+
+    .text {
+        text-align: justify;
+    }
+}
+
+/*
+ * Десктоп (макет 1920×958, отступы 360/40/40): справа сверху блок 600 (текст → 32 → кнопка 600×66),
+ * через 100 — внизу заголовок (1375) и «/07» справа по нижнему краю. Фото + затемнение 20%.
+ */
+@media (min-width: 1024px) {
+    .wrapper {
+        padding: calc(360 * var(--u)) 0 var(--gutter);
+    }
+
+    .bg {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("/about/form-desktop.jpg");
+        background-position: center 57%;
+    }
+
+    .container {
+        gap: calc(100 * var(--u));
+    }
+
+    .content {
+        order: -1;
+        width: max(360px, calc(600 * var(--u)));
+        gap: calc(32 * var(--u));
+    }
+
+    .heading {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-end;
+        gap: 24px;
+    }
+
+    .title {
+        max-width: calc(1375 * var(--u));
+    }
+
+    .tag {
+        align-self: auto;
+        flex-shrink: 0;
+    }
+
+    .btn {
+        justify-content: space-between;
+        padding: max(13.5px, calc(20 * var(--u))) max(14px, calc(22 * var(--u)));
+    }
+
+    .btn svg {
+        width: max(14px, calc(24 * var(--u)));
+        height: auto;
+    }
+}
