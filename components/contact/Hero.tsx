@@ -23,10 +23,10 @@ const CONTACTS = [
 // Арт-дирекшн: на десктопе в макете другой кадр (909×242), на мобилке — 335×220
 const alt = "Woman on a terrace of a concrete house overlooking the hills"
 const { props: { srcSet: desktop } } = getImageProps({
-    alt, src: "/contact/image-desktop.jpg", width: 1568, height: 418, sizes: "50vw",
+    alt, src: "/contact/image-desktop.webp", width: 667, height: 141, sizes: "50vw",
 })
 const { props: { srcSet: mobile, ...img } } = getImageProps({
-    alt, src: "/contact/image.webp", width: 1005, height: 660, sizes: "100vw",
+    alt, src: "/contact/image.webp", width: 667, height: 438, sizes: "100vw",
 })
 
 /**

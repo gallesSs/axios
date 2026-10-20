@@ -130,7 +130,7 @@
 
     .bg {
         background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("/about/form-desktop.webp");
-        background-position: center 57%;
+        background-position: center;
     }
 
     .container {

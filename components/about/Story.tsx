@@ -20,7 +20,7 @@ export default function Story() {
                 <BlurReveal className={s.subtext}>Our approach combines the flexibility of modular architecture with the character and permanence of a carefully designed home. Every configuration begins with the same principle: make space for the life that happens inside it.</BlurReveal>
             </div>
             <div className={`container ${s.bottom}`}>
-                <ModularImage className={s.imageSm} alt="Concrete modular home" src="/about/story-sm.webp" />
+                <ModularImage className={s.imageSm} alt="Concrete modular home" src="/about/story-sm.webp" srcDesktop="/about/story-sm-desktop.webp" />
                 <div className={s.btnWrap}>
                     <RollButton
                         href="/#approach"

@@ -6,13 +6,19 @@ import { EASE_IN_OUT, EASE_OUT_EXPO } from "./config";
 const COLS = 5;
 const ROWS = 4;
 
-type Props = { src: string; alt?: string; className?: string };
+type Props = {
+  src: string;
+  /** Кадр для десктопа (≥1024), если в макете он отличается от мобильного */
+  srcDesktop?: string;
+  alt?: string;
+  className?: string;
+};
 
 /**
  * Картинка «собирается из модулей»: сетка плашек цвета фона
  * схлопывается и проворачивается по диагонали, открывая кадр.
  */
-export default function ModularImage({ src, alt = "", className }: Props) {
+export default function ModularImage({ src, srcDesktop, alt = "", className }: Props) {
   return (
     <motion.div
       className={className}
@@ -21,15 +27,18 @@ export default function ModularImage({ src, alt = "", className }: Props) {
       whileInView="visible"
       viewport={{ once: true, amount: 0.4 }}
     >
-      <motion.img
-        src={src}
-        alt={alt}
-        style={{ width: "100%" }}
-        variants={{
-          hidden: { scale: 1.25 },
-          visible: { scale: 1, transition: { duration: 2.2, ease: EASE_OUT_EXPO } },
-        }}
-      />
+      <picture>
+        {srcDesktop && <source media="(min-width: 1024px)" srcSet={srcDesktop} />}
+        <motion.img
+          src={src}
+          alt={alt}
+          style={{ width: "100%" }}
+          variants={{
+            hidden: { scale: 1.25 },
+            visible: { scale: 1, transition: { duration: 2.2, ease: EASE_OUT_EXPO } },
+          }}
+        />
+      </picture>
       <div
         aria-hidden="true"
         style={{

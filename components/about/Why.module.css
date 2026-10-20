@@ -157,7 +157,8 @@
     position: absolute;
     inset: 0;
     background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("/about/why.webp");
-    background-position: left;
+    /* Мобилка: кадр как в макете (левая часть фото), десктоп — по центру */
+    background-position: 12% center;
     background-repeat: no-repeat;
     background-size: cover;
     will-change: transform;
@@ -354,5 +355,11 @@
 
     .slide {
         text-align: justify;
+    }
+}
+
+@media (min-width: 1024px) {
+    .bg {
+        background-position: center;
     }
 }
