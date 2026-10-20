@@ -16,14 +16,14 @@ type Item = {
 
 /** Фото и подписи, разбросанные вокруг центрального «окна» (фото самой секции) */
 const ITEMS: Item[] = [
-    { src: "/about/do.png", w: 1125, h: 690, size: 14, x: 5, y: 9, depth: 1.1 },
-    { src: "/home/about.png", w: 1090, h: 1443, size: 7, x: 40, y: 3, depth: 0.7, wide: true },
-    { src: "/about/story-sm.png", w: 600, h: 600, size: 10, x: 71, y: 7, depth: 1 },
-    { src: "/home/modular.png", w: 1374, h: 1145, size: 13, x: 82, y: 44, depth: 1.3 },
+    { src: "/about/do.webp", w: 1125, h: 690, size: 14, x: 5, y: 9, depth: 1.1 },
+    { src: "/home/about.webp", w: 1090, h: 1443, size: 7, x: 40, y: 3, depth: 0.7, wide: true },
+    { src: "/about/story-sm.webp", w: 600, h: 600, size: 10, x: 71, y: 7, depth: 1 },
+    { src: "/home/modular.webp", w: 1374, h: 1145, size: 13, x: 82, y: 44, depth: 1.3 },
     { src: "/about/system.jpg", w: 1170, h: 1454, size: 8, x: 23, y: 56, depth: 0.8 },
-    { src: "/about/story.png", w: 1125, h: 888, size: 11, x: 4, y: 68, depth: 1.2 },
-    { src: "/home/find.png", w: 1320, h: 1191, size: 9, x: 62, y: 74, depth: 0.9 },
-    { src: "/about/form.png", w: 1125, h: 1548, size: 7, x: 89, y: 78, depth: 1.1, wide: true },
+    { src: "/about/story.webp", w: 1125, h: 888, size: 11, x: 4, y: 68, depth: 1.2 },
+    { src: "/home/find.webp", w: 1320, h: 1191, size: 9, x: 62, y: 74, depth: 0.9 },
+    { src: "/about/form.webp", w: 1125, h: 1548, size: 7, x: 89, y: 78, depth: 1.1, wide: true },
     { text: "DESIGN AROUND LIFE", x: 22, y: 30, depth: 0.6, wide: true },
     { text: "ADAPT TO PLACE", x: 66, y: 32, depth: 0.7, wide: true },
     { text: "BUILT WITH INTENTION", x: 6, y: 47, depth: 0.5, wide: true },

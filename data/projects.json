@@ -1,0 +1,213 @@
+[
+  {
+    "id": "01",
+    "slug": "mountain-house",
+    "title": "Mountain House",
+    "description": "A dark timber retreat shaped by the raw beauty of the alpine landscape. Floor-to-ceiling glazing brings distant peaks and natural light into the living spaces, creating a strong connection with the surrounding terrain. Warm timber interiors provide a calm and inviting atmosphere, offering shelter from the elements without losing the feeling of openness.",
+    "images": [
+      {
+        "src": "/projects/mountain-house/1.jpg",
+        "alt": "Mountain House — photo 1"
+      },
+      {
+        "src": "/projects/mountain-house/2.jpg",
+        "alt": "Mountain House — photo 2"
+      },
+      {
+        "src": "/projects/mountain-house/3.jpg",
+        "alt": "Mountain House — photo 3"
+      },
+      {
+        "src": "/projects/mountain-house/4.jpg",
+        "alt": "Mountain House — photo 4"
+      }
+    ],
+    "hero": {
+      "src": "/projects/mountain-house/hero.jpg",
+      "alt": "Mountain House — exterior",
+      "mobilePosition": "24% 50%"
+    },
+    "gallery": [
+      {
+        "src": "/projects/mountain-house/gallery/1.jpg",
+        "alt": "Mountain House — interior 1"
+      },
+      {
+        "src": "/projects/mountain-house/gallery/2.jpg",
+        "alt": "Mountain House — interior 2"
+      },
+      {
+        "src": "/projects/mountain-house/gallery/3.jpg",
+        "alt": "Mountain House — interior 3"
+      },
+      {
+        "src": "/projects/mountain-house/gallery/4.jpg",
+        "alt": "Mountain House — interior 4"
+      },
+      {
+        "src": "/projects/mountain-house/gallery/5.jpg",
+        "alt": "Mountain House — interior 5"
+      },
+      {
+        "src": "/projects/mountain-house/gallery/6.jpg",
+        "alt": "Mountain House — interior 6"
+      },
+      {
+        "src": "/projects/mountain-house/gallery/7.jpg",
+        "alt": "Mountain House — interior 7"
+      },
+      {
+        "src": "/projects/mountain-house/gallery/8.jpg",
+        "alt": "Mountain House — interior 8"
+      },
+      {
+        "src": "/projects/mountain-house/gallery/9.jpg",
+        "alt": "Mountain House — interior 9"
+      }
+    ]
+  },
+  {
+    "id": "02",
+    "slug": "pool-house",
+    "title": "Pool House",
+    "description": "A low concrete residence built around water, natural light and privacy. Expansive glass openings connect the interior with the surrounding garden, while a reflecting pool extends the architecture into the landscape. Natural materials and clean lines create a quiet atmosphere of understated luxury, where indoor and outdoor living become one continuous experience.",
+    "images": [
+      {
+        "src": "/projects/pool-house/1.jpg",
+        "alt": "Pool House — photo 1"
+      },
+      {
+        "src": "/projects/pool-house/2.jpg",
+        "alt": "Pool House — photo 2"
+      },
+      {
+        "src": "/projects/pool-house/3.jpg",
+        "alt": "Pool House — photo 3"
+      },
+      {
+        "src": "/projects/pool-house/4.jpg",
+        "alt": "Pool House — photo 4"
+      }
+    ]
+  },
+  {
+    "id": "03",
+    "slug": "rock-house",
+    "title": "Rock House",
+    "description": "A sheltered architectural retreat embedded between stone, water and mountains. Natural rock formations provide protection and shape the composition, while carefully framed openings reveal views of the sea and distant peaks. Concrete, stone and timber create a tactile connection with the rugged surroundings, giving the residence a grounded and timeless character.",
+    "images": [
+      {
+        "src": "/projects/rock-house/1.jpg",
+        "alt": "Rock House — photo 1"
+      },
+      {
+        "src": "/projects/rock-house/2.jpg",
+        "alt": "Rock House — photo 2"
+      },
+      {
+        "src": "/projects/rock-house/3.jpg",
+        "alt": "Rock House — photo 3"
+      },
+      {
+        "src": "/projects/rock-house/4.jpg",
+        "alt": "Rock House — photo 4"
+      }
+    ]
+  },
+  {
+    "id": "04",
+    "slug": "coastal-house",
+    "title": "Coastal House",
+    "description": "A monolithic concrete home framing the horizon and the changing moods of the sea. Floor-to-ceiling windows open the living spaces toward uninterrupted ocean views, while warm timber surfaces balance the raw texture of exposed concrete. A sheltered terrace creates a seamless transition between indoor and outdoor living, allowing the surrounding coastline to become part of the home.",
+    "images": [
+      {
+        "src": "/projects/coastal-house/1.jpg",
+        "alt": "Coastal House — photo 1"
+      },
+      {
+        "src": "/projects/coastal-house/2.jpg",
+        "alt": "Coastal House — photo 2"
+      },
+      {
+        "src": "/projects/coastal-house/3.jpg",
+        "alt": "Coastal House — photo 3"
+      },
+      {
+        "src": "/projects/coastal-house/4.jpg",
+        "alt": "Coastal House — photo 4"
+      }
+    ]
+  },
+  {
+    "id": "05",
+    "slug": "alpine-house",
+    "title": "Alpine House",
+    "description": "A quiet mountain residence where natural materials meet panoramic alpine views. Its low-profile silhouette follows the contours of the terrain, while stone, concrete and timber reflect the textures of the surrounding landscape. Sheltered outdoor spaces offer a quiet connection with the changing seasons, creating a home that feels protected, grounded and deeply connected to nature.",
+    "images": [
+      {
+        "src": "/projects/alpine-house/1.jpg",
+        "alt": "Alpine House — photo 1"
+      },
+      {
+        "src": "/projects/alpine-house/2.jpg",
+        "alt": "Alpine House — photo 2"
+      },
+      {
+        "src": "/projects/alpine-house/3.jpg",
+        "alt": "Alpine House — photo 3"
+      },
+      {
+        "src": "/projects/alpine-house/4.jpg",
+        "alt": "Alpine House — photo 4"
+      }
+    ]
+  },
+  {
+    "id": "06",
+    "slug": "forest-house",
+    "title": "FOREST House",
+    "description": "A contemporary woodland retreat immersed in light, timber and the surrounding forest. Dark timber cladding allows the structure to blend into the woodland, while carefully positioned glazing filters natural light through the forest canopy. A secluded terrace extends the living spaces beneath the trees, creating a peaceful retreat that balances modern comfort with the simplicity of living close to nature.",
+    "images": [
+      {
+        "src": "/projects/forest-house/1.jpg",
+        "alt": "FOREST House — photo 1"
+      },
+      {
+        "src": "/projects/forest-house/2.jpg",
+        "alt": "FOREST House — photo 2"
+      },
+      {
+        "src": "/projects/forest-house/3.jpg",
+        "alt": "FOREST House — photo 3"
+      },
+      {
+        "src": "/projects/forest-house/4.jpg",
+        "alt": "FOREST House — photo 4"
+      }
+    ]
+  },
+  {
+    "id": "07",
+    "slug": "valley-house",
+    "title": "VALLEY House",
+    "description": "A cantilevered residence opening toward expansive valley views and distant peaks. Its horizontal volumes follow the contours of the sloping terrain, while panoramic glazing captures the changing light across the landscape. A generous cantilevered terrace extends toward the valley, creating an uninterrupted sense of openness and a strong connection between the architecture and its surroundings.",
+    "images": [
+      {
+        "src": "/projects/valley-house/1.jpg",
+        "alt": "VALLEY House — photo 1"
+      },
+      {
+        "src": "/projects/valley-house/2.jpg",
+        "alt": "VALLEY House — photo 2"
+      },
+      {
+        "src": "/projects/valley-house/3.jpg",
+        "alt": "VALLEY House — photo 3"
+      },
+      {
+        "src": "/projects/valley-house/4.jpg",
+        "alt": "VALLEY House — photo 4"
+      }
+    ]
+  }
+]

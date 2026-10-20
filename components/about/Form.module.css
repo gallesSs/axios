@@ -16,7 +16,7 @@
 .bg {
     position: absolute;
     inset: -10% 0;
-    background-image: url("/about/form.png");
+    background-image: url("/about/form.webp");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -129,7 +129,7 @@
     }
 
     .bg {
-        background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("/about/form-desktop.jpg");
+        background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("/about/form-desktop.webp");
         background-position: center 57%;
     }
 

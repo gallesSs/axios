@@ -1,0 +1,84 @@
+.page {
+    flex: 1 0 auto;
+    background: var(--Primary-01);
+    color: var(--Primary-02);
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 60px;
+    min-height: 100svh;
+    padding-top: max(76px, calc(100 * var(--u)));
+    padding-bottom: 60px;
+}
+
+/* Размер — как у AXIS в футере (m/huge → huge) */
+.title {
+    --tracking: -0.04em;
+    font-family: var(--font-sans);
+    font-size: var(--fs-huge);
+    font-weight: 400;
+    line-height: 100%;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.text {
+    /* m/h3 → p1 */
+    font-family: var(--font-sans);
+    font-size: var(--fs-p1);
+    font-weight: 500;
+    line-height: 110%;
+    text-transform: uppercase;
+}
+
+.btn {
+    color: var(--Accent);
+
+    /* m/button text → p1 */
+    font-family: var(--font-sans);
+    font-size: var(--fs-button);
+    font-weight: 500;
+    line-height: 110%;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 44px;
+    padding: 0 20px;
+    background: var(--Primary-02);
+    --roll-fill: var(--Accent);
+    --roll-color: var(--Primary-02);
+}
+
+@media (min-width: 768px) {
+    .content {
+        align-self: flex-end;
+        width: min(520px, 100%);
+    }
+}
+
+@media (min-width: 1024px) {
+    .content {
+        width: max(360px, calc(600 * var(--u)));
+        gap: calc(32 * var(--u));
+    }
+
+    .btn {
+        justify-content: space-between;
+        height: auto;
+        padding: max(13.5px, calc(20 * var(--u))) max(14px, calc(22 * var(--u)));
+    }
+
+    .btn svg {
+        width: max(14px, calc(24 * var(--u)));
+        height: auto;
+    }
+}

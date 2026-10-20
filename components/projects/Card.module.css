@@ -1,0 +1,247 @@
+/*
+ * Мобилка (макет 375): «/01» + заголовок по словам в столбик (gap 8), до ленты 24;
+ * лента кадров 260×244 с шагом 10 скроллится по горизонтали от края до края экрана.
+ */
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.left {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* flex — чтобы строку не раздувал line-height обёртки */
+.tagWrap {
+    display: flex;
+}
+
+.tag {
+    color: var(--Primary-01);
+
+    /* m/h3 */
+    font-family: var(--font-sans);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 110%;
+    text-transform: uppercase;
+}
+
+.title {
+    color: var(--Accent);
+
+    /* m/h1 */
+    font-family: var(--font-sans);
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 100%;
+    text-transform: uppercase;
+}
+
+.link {
+    --ease: cubic-bezier(0.76, 0, 0.24, 1);
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+}
+
+.link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -0.04em;
+    width: 100%;
+    height: max(1px, 0.04em);
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: 100% 50%;
+    transition: transform 0.6s var(--ease);
+}
+
+.link:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 4px;
+}
+
+/* В мобильном макете описания нет */
+.textBox {
+    display: none;
+}
+
+.list {
+    display: flex;
+    gap: 10px;
+    /* Лента выходит за поля контейнера до краёв экрана, первый кадр — по сетке */
+    margin: 0 calc(-1 * var(--gutter));
+    padding: 0 var(--gutter);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding: 0 var(--gutter);
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+}
+
+.list::-webkit-scrollbar {
+    display: none;
+}
+
+.item {
+    flex: 0 0 auto;
+    width: 260px;
+    height: 244px;
+    scroll-snap-align: start;
+}
+
+.media {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.mask {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #e9e9e9;
+}
+
+.zoom {
+    position: absolute;
+    inset: 0;
+    /* Отдельное свойство scale: transform занят анимацией появления */
+    transition: scale 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.image {
+    object-fit: cover;
+    user-select: none;
+}
+
+/* Ховер: кадр мягко приближается, у заголовка прочерчивается линия */
+@media (hover: hover) {
+    .media:hover .zoom {
+        scale: 1.08;
+    }
+
+    .container:hover .link::after {
+        transform: scaleX(1);
+        transform-origin: 0% 50%;
+    }
+
+    .container:hover .text,
+    .container:focus-within .text {
+        opacity: 1;
+        filter: blur(0px);
+        transform: translateY(0);
+        clip-path: inset(0% 0% 0% 0%);
+        transition:
+            opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.05s,
+            filter 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.05s,
+            transform 1s cubic-bezier(0.16, 1, 0.3, 1) 0.05s,
+            clip-path 1s cubic-bezier(0.65, 0, 0.35, 1);
+    }
+}
+
+/*
+ * Десктоп (макет 1920): заголовок слева в одну строку, справа 4 кадра 290×272 с шагом 20;
+ * номер проекта в макете не показан.
+ */
+@media (min-width: 1024px) {
+    .container {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: max(24px, calc(64 * var(--u)));
+    }
+
+    .tagWrap {
+        display: none;
+    }
+
+    /* Колонка высотой с ряд кадров (270 в макете); описание занимает остаток */
+    .left {
+        height: calc(270 * var(--u));
+        min-width: 0;
+        gap: max(8px, calc(16 * var(--u)));
+    }
+
+    /*
+     * Ховер строки: описание опускается «шторкой» сверху вниз, проявляясь из размытия.
+     * В макете состояния нет — тайминги и отступ 16 от заголовка предположительные.
+     */
+    .textBox {
+        display: block;
+        flex: 1;
+        min-height: 0;
+    }
+
+    .text {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: var(--lines, 3);
+        line-clamp: var(--lines, 3);
+        overflow: hidden;
+        color: var(--Primary-01);
+
+        /* body */
+        font-family: var(--font-body);
+        font-size: var(--fs-body);
+        font-style: normal;
+        font-weight: 400;
+        line-height: 120%;
+
+        opacity: 0;
+        filter: blur(6px);
+        transform: translateY(12px);
+        clip-path: inset(0% 0% 100% 0%);
+        transition:
+            opacity 0.4s ease,
+            filter 0.4s ease,
+            transform 0.5s cubic-bezier(0.76, 0, 0.24, 1),
+            clip-path 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+        pointer-events: none;
+    }
+
+    .title {
+        color: var(--Primary-01);
+
+        /* h3 */
+        font-size: var(--fs-h3);
+        line-height: 110%;
+    }
+
+    .link {
+        flex-direction: row;
+        flex-wrap: wrap;
+        column-gap: 0.25em;
+    }
+
+    .list {
+        flex-shrink: 0;
+        gap: max(10px, calc(20 * var(--u)));
+        margin: 0;
+        padding: 0;
+        overflow: visible;
+    }
+
+    /* В макете кадры 272 в ряду высотой 270 — выступают на 1px сверху и снизу */
+    .item {
+        width: calc(290 * var(--u));
+        height: calc(272 * var(--u));
+        margin: calc(-1 * var(--u)) 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .zoom,
+    .text,
+    .link::after {
+        transition-duration: 0.01ms !important;
+    }
+}

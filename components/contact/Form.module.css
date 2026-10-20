@@ -1,0 +1,231 @@
+.wrapper {
+    /* Цвета ошибки в макете нет — приглушённый красный, читается на тёмном фоне */
+    --error: #ff6b5b;
+    --ease: cubic-bezier(0.76, 0, 0.24, 1);
+    color: var(--Primary-02);
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.fields {
+    display: flex;
+    flex-direction: column;
+    gap: max(16px, calc(24 * var(--u)));
+}
+
+.row {
+    display: flex;
+    gap: max(10px, calc(20 * var(--u)));
+}
+
+.row > .field {
+    flex: 1 1 0;
+    min-width: 0;
+}
+
+.field {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    /* Снизу +1px под линию: в макете обводка входит в высоту поля (12 + 18 + 12 + 1) */
+    --pad: max(12px, calc(16 * var(--u)));
+    padding: var(--pad) 0 calc(var(--pad) + 1px);
+}
+
+/* Нижняя линия поля: прочерчивается при появлении, в фокусе становится толще */
+.line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background: currentColor;
+    transform-origin: 0% 50%;
+    transition:
+        height 0.4s var(--ease),
+        background-color 0.4s var(--ease);
+}
+
+.field:focus-within .line {
+    height: 2px;
+}
+
+.field[data-invalid] .line {
+    background-color: var(--error);
+}
+
+.input {
+    flex: 1 1 auto;
+    min-width: 0;
+    width: 100%;
+    color: inherit;
+
+    /* m/h3 → p1 */
+    font-family: var(--font-sans);
+    font-size: var(--fs-p1);
+    font-style: normal;
+    font-weight: 500;
+    line-height: 110%;
+    outline: none;
+    border-radius: 0;
+}
+
+.input::placeholder {
+    color: inherit;
+    opacity: 1;
+    transition: opacity 0.4s var(--ease);
+}
+
+@media (hover: hover) {
+    .field:hover .input::placeholder {
+        opacity: 0.7;
+    }
+}
+
+.field:focus-within .input::placeholder {
+    opacity: 0.4;
+}
+
+/* Автозаполнение Chrome/Safari не должно перекрашивать поле */
+.input:-webkit-autofill,
+.input:-webkit-autofill:hover,
+.input:-webkit-autofill:focus {
+    -webkit-text-fill-color: var(--Primary-02);
+    -webkit-box-shadow: 0 0 0 1000px var(--Primary-01) inset;
+    caret-color: var(--Primary-02);
+    transition: background-color 9999s;
+}
+
+.select {
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    padding-right: max(24px, calc(32 * var(--u)));
+}
+
+/* Выпадающий список — системный, светлый */
+.select option {
+    color: var(--Primary-01);
+    background: var(--Primary-02);
+}
+
+/* Стрелка поверх селекта (клик проходит в селект): мобилка 16 → десктоп 24 */
+.chevron {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    width: max(16px, calc(24 * var(--u)));
+    height: auto;
+    pointer-events: none;
+    transform: translateY(-50%);
+    transition: transform 0.5s var(--ease);
+}
+
+@media (hover: hover) {
+    .selectField:hover .chevron {
+        transform: translateY(-30%);
+    }
+}
+
+.textarea {
+    display: block;
+    resize: none;
+    overflow: hidden;
+}
+
+.error {
+    flex-shrink: 0;
+    color: var(--error);
+
+    /* m/body → body */
+    font-family: var(--font-body);
+    font-size: var(--fs-body);
+    font-weight: 400;
+    line-height: 120%;
+}
+
+.btn {
+    color: var(--Accent);
+
+    /* m/button text → p1 */
+    font-family: var(--font-sans);
+    font-size: var(--fs-button);
+    font-style: normal;
+    font-weight: 500;
+    line-height: 110%;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 44px;
+    padding: 0 20px;
+    background: var(--Primary-02);
+    --roll-fill: var(--Accent);
+    --roll-color: var(--Primary-02);
+}
+
+.form[aria-busy="true"] .btn {
+    cursor: progress;
+}
+
+.sent {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.sentTitle {
+    /* m/h2 → h2 */
+    font-family: var(--font-sans);
+    font-size: var(--fs-h2);
+    font-weight: 400;
+    line-height: 100%;
+    text-transform: uppercase;
+}
+
+.sentText {
+    /* m/body → body */
+    font-family: var(--font-body);
+    font-size: var(--fs-body);
+    font-weight: 400;
+    line-height: 120%;
+}
+
+.visuallyHidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+/* Десктоп (макет 1920): кнопка 290×66, текст слева, стрелка справа */
+@media (min-width: 1024px) {
+    .btn {
+        justify-content: space-between;
+        width: max(200px, calc(290 * var(--u)));
+        height: auto;
+        padding: max(13.5px, calc(20 * var(--u))) max(14px, calc(22 * var(--u)));
+    }
+
+    .btn svg {
+        width: max(14px, calc(24 * var(--u)));
+        height: auto;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .line,
+    .input::placeholder,
+    .chevron {
+        transition-duration: 0.01ms !important;
+    }
+}

@@ -1,0 +1,14 @@
+.page {
+    background: var(--Primary-01);
+}
+
+/* Мобилка: до футера 60. Десктоп: футер начинается сразу под блоком (свой отступ 200) */
+.section {
+    padding-bottom: 60px;
+}
+
+@media (min-width: 1024px) {
+    .section {
+        padding-bottom: 0;
+    }
+}

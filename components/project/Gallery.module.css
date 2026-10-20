@@ -1,0 +1,64 @@
+/*
+ * Мобилка (макет 375): цикл «1 большой кадр 335 + 2 маленьких 163» с шагом 10.
+ * Десктоп (макет 1920): сетка 3 колонки квадратов 600 с шагом 20.
+ */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.item:nth-child(3n + 1) {
+  grid-column: span 2;
+}
+
+.frame {
+  position: relative;
+  aspect-ratio: 1;
+}
+
+.mask {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: #e9e9e9;
+}
+
+.parallax {
+  position: absolute;
+  inset: -9% 0;
+}
+
+.zoom {
+  position: absolute;
+  inset: 0;
+  /* Отдельное свойство scale: transform занят анимацией появления */
+  transition: scale 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.img {
+  object-fit: cover;
+}
+
+@media (hover: hover) {
+  .frame:hover .zoom {
+    scale: 1.06;
+  }
+}
+
+@media (min-width: 1024px) {
+  .gallery {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+  }
+
+  .item:nth-child(3n + 1) {
+    grid-column: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zoom {
+    transition-duration: 0.01ms !important;
+  }
+}

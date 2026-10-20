@@ -46,6 +46,47 @@
     align-items: center;
 }
 
+/* Ховер: логотип «моргает» шторкой — уезжает вверх и возвращается снизу */
+.logoLink {
+    display: block;
+    overflow: hidden;
+}
+
+.logoLink:focus-visible {
+    outline: 1px solid currentColor;
+    outline-offset: 4px;
+}
+
+@media (hover: hover) {
+    .logoLink:hover .logo {
+        animation: logo-roll 0.7s cubic-bezier(0.76, 0, 0.24, 1);
+    }
+}
+
+@keyframes logo-roll {
+    0% {
+        transform: translateY(0);
+    }
+
+    49.9% {
+        transform: translateY(-110%);
+    }
+
+    50% {
+        transform: translateY(110%);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .logoLink:hover .logo {
+        animation: none;
+    }
+}
+
 /* Мобилка 72×13 → десктоп 97×17 */
 .logo {
     width: max(72px, calc(97 * var(--u)));

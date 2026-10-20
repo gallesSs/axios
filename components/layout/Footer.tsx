@@ -1,9 +1,15 @@
 import BlurReveal from "@/components/motion/BlurReveal"
 import FlipLetters from "@/components/motion/FlipLetters"
 import LineReveal from "@/components/motion/LineReveal"
+import RollLink from "@/components/motion/RollLink"
 import s from "./Footer.module.css"
 
-const LINKS = ["HOME", "PROJECTS", "ABOUT", "CONTACT"]
+const LINKS = [
+    { href: "/", label: "HOME" },
+    { href: "/projects", label: "PROJECTS" },
+    { href: "/about", label: "ABOUT" },
+    { href: "/contact", label: "CONTACT" },
+]
 const TEXT_MOBILE = ["MODULAR", "ARCHITECTURE FOR", "MODERN LIVING."]
 const TEXT_DESKTOP = ["MODULAR", "ARCHITECTURE", "FOR MODERN", "LIVING."]
 
@@ -12,13 +18,10 @@ function Footer() {
         <div className={`container ${s.wrapper}`}>
             <nav>
                 <ul className={s.list}>
-                    {LINKS.map((label, i) => (
-                        <li key={label} className={s.item}>
+                    {LINKS.map(({ href, label }, i) => (
+                        <li key={href} className={s.item}>
                             <LineReveal delay={i * 0.06}>
-                                {/* Ховер: текст перекатывается, подчёркивание прочерчивается слева и уходит вправо */}
-                                <a className={s.link} href="">
-                                    <span className={s.linkText} data-text={label}>{label}</span>
-                                </a>
+                                <RollLink href={href} className={s.link}>{label}</RollLink>
                             </LineReveal>
                         </li>
                     ))}

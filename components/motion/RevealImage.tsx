@@ -1,16 +1,23 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import { motion, useScroll, useTransform } from "motion/react";
 import { EASE_OUT_EXPO } from "./config";
 
-type Props = { src: string; alt?: string; className?: string };
+type Props = {
+  src: string;
+  alt?: string;
+  className?: string;
+  /** Подсказка браузеру о ширине кадра — для выбора размера из srcset */
+  sizes?: string;
+};
 
 /**
  * Картинка раскрывается из маленькой «капсулы» в полный кадр,
  * а внутри маски медленно уплывает (параллакс).
  */
-export default function RevealImage({ src, alt = "", className }: Props) {
+export default function RevealImage({ src, alt = "", className, sizes = "100vw" }: Props) {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -45,11 +52,7 @@ export default function RevealImage({ src, alt = "", className }: Props) {
           }}
           transition={{ duration: 2, ease: EASE_OUT_EXPO }}
         >
-          <img
-            src={src}
-            alt={alt}
-            style={{ width: "100%", height: "100%", maxWidth: "none", objectFit: "cover" }}
-          />
+          <Image fill src={src} alt={alt} sizes={sizes} style={{ objectFit: "cover" }} />
         </motion.div>
       </motion.div>
     </motion.div>

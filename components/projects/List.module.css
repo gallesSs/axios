@@ -1,0 +1,6 @@
+/* Между проектами: мобилка 60 → десктоп 64 */
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: max(60px, calc(64 * var(--u)));
+}

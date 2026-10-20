@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import { preload } from "react-dom";
 import { motion, useScroll, useTransform, type MotionValue } from "motion/react";
 import LineReveal from "@/components/motion/LineReveal";
 import { EASE_IN_OUT, EASE_OUT_EXPO, INTRO_DELAY } from "@/components/motion/config";
@@ -9,6 +10,9 @@ import s from "./Hero.module.css";
 const TITLE = "AXIS";
 
 export default function Hero() {
+  // Фон первого экрана (LCP) задан в CSS — браузер нашёл бы его поздно, подгружаем заранее
+  preload("/home/hero.webp", { as: "image", media: "(max-width: 1023px)", fetchPriority: "high" });
+  preload("/home/hero-desktop.webp", { as: "image", media: "(min-width: 1024px)", fetchPriority: "high" });
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,

@@ -1,0 +1,83 @@
+/*
+ * Мобилка (макет 375×667): кадр на весь экран, название по словам в белых плашках
+ * (45px, поля 3/4, шаг 8) у нижнего левого края с отступом 20.
+ * Десктоп (макет 1920×944): название одной плашкой 164px (поля 12, трекинг -4%), отступ 40.
+ */
+.hero {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 100vh;
+  max-height: 667px;
+  padding: var(--gutter);
+  background-color: var(--Accent);
+}
+
+.parallax,
+.media {
+  position: absolute;
+  inset: 0;
+}
+
+.media {
+  will-change: transform, clip-path;
+}
+
+.img {
+  object-fit: cover;
+  object-position: var(--pos-m, 50% 50%);
+}
+
+.titleWrap {
+  position: relative;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  color: var(--Accent);
+
+  font-family: var(--font-sans);
+  /* m: 45 → 164 на 1920 */
+  font-size: max(45px, calc(164 * var(--u)));
+  font-style: normal;
+  font-weight: 400;
+  line-height: 100%;
+  text-transform: uppercase;
+}
+
+.word {
+  padding: 3px 4px;
+  background: var(--Primary-02);
+}
+
+/* Планшет: композиция мобилки на весь экран */
+@media (min-width: 768px) {
+  .hero {
+    max-height: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .img {
+    object-position: 50% 50%;
+  }
+
+  .title {
+    --tracking: -0.04em;
+    display: block;
+    width: fit-content;
+    padding: max(4px, calc(12 * var(--u)));
+    color: var(--Primary-01);
+    background: var(--Primary-02);
+  }
+
+  .word {
+    padding: 0;
+    background: none;
+  }
+}

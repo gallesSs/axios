@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type CSSProperties } from "react";
+import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { A11y, Keyboard, Parallax } from "swiper/modules";
 import { motion, type Variants } from "motion/react";
@@ -135,14 +136,20 @@ function Collection() {
             <motion.div className={s.media} custom={i} variants={cardMedia}>
               {/* Отдельный слой под масштаб появления: transform картинки занят параллаксом Swiper */}
               <motion.div className={s.mediaInner} custom={i} variants={cardZoom}>
-                {/* Картинка внутри маски уплывает и чуть увеличивается при свайпе */}
-                <img
-                  src={item.img}
-                  alt={item.title}
+                {/* Картинка внутри маски уплывает и чуть увеличивается при свайпе.
+                    Слой шире кадра (130%) — запас под параллакс */}
+                <div
+                  className={s.parallax}
                   data-swiper-parallax="30%"
-                  data-swiper-parallax-scale="1.15"
-                  draggable={false}
-                />
+                  data-swiper-parallax-scale="1.15">
+                  <Image
+                    fill
+                    sizes="(min-width: 1024px) 40vw, (min-width: 768px) 60vw, 120vw"
+                    src={item.img}
+                    alt={item.title}
+                    draggable={false}
+                  />
+                </div>
               </motion.div>
             </motion.div>
             <div
@@ -162,6 +169,7 @@ function Collection() {
       </motion.div>
 
       <RollButton
+        href="/projects"
         className={s.button}
         text="VIEW all HOUSEs"
         icon={

@@ -10,7 +10,7 @@
 .bg {
   position: absolute;
   inset: 0;
-  background-image: url("/home/hero.png");
+  background-image: url("/home/hero.webp");
   background-size: cover;
   background-position: center;
   will-change: transform, clip-path;
@@ -93,7 +93,7 @@
  */
 @media (min-width: 1024px) {
   .bg {
-    background-image: url("/home/hero-desktop.jpg");
+    background-image: url("/home/hero-desktop.webp");
   }
 
   .content {

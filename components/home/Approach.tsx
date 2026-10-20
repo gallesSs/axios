@@ -24,7 +24,7 @@ const STEPS = [
 
 function Approach() {
   return (
-    <div className={`container ${s.wrapper}`}>
+    <div id="approach" className={`container ${s.wrapper}`}>
       <div className={s.heading}>
         <ScrambleText text="/02" className={s.tag} />
         <StretchLetters lines={["OUR", "APPROACH"]} className={s.title} inline />

@@ -3,6 +3,7 @@ import { Manrope, Plus_Jakarta_Sans } from "next/font/google";
 import "lenis/dist/lenis.css";
 import "./globals.css";
 import Header from "@/components/layout/Header";
+import PageTransition from "@/components/motion/PageTransition";
 import Preloader from "@/components/motion/Preloader";
 import SmoothScroll from "@/components/motion/SmoothScroll";
 import Footer from "@/components/layout/Footer";
@@ -15,7 +16,6 @@ const manrope = Manrope({
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  style: ["normal", "italic"],
   variable: "--font-jakarta",
   display: "swap",
 });
@@ -31,6 +31,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body>
         <SmoothScroll>
           <Preloader />
+          <PageTransition />
           <Header />
           {children}
           <Footer />

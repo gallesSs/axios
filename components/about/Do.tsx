@@ -27,7 +27,7 @@ export default function Do() {
                 <ScrambleText text="/02" className={s.tag} />
                 <FlipLetters text="WHAT WE DO" className={s.title} />
             </div>
-            <LouverImage className={s.image} src="/about/do.png" alt="Modular home from above" />
+            <LouverImage className={s.image} src="/about/do.webp" alt="Modular home from above" />
             <div className={s.info}>
                 <BlurReveal className={s.boldText}>We create modular homes designed around the way you live and the place they belong to.</BlurReveal>
                 <BlurReveal className={s.text} delay={0.15}>From the first configuration to the final build, we bring architecture, modular construction and thoughtful design together in one system.</BlurReveal>

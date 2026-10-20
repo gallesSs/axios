@@ -14,16 +14,16 @@ export default function Story() {
                 <ScrambleText text="/05" className={s.tag} />
                 <StretchLetters lines={["OUR", "STORY"]} className={s.title} inline />
             </div>
-            <RevealImage className={s.image} alt="Modular home terrace" src="/about/story.png" />
+            <RevealImage className={s.image} alt="Modular home terrace" src="/about/story.webp" sizes="(min-width: 1024px) 50vw, 100vw" />
             <div className={`container ${s.content}`}>
                 <ScrollWords className={s.text} text="We create modular homes that bring together thoughtful design, precise construction and a strong connection to place. Instead of treating a home as a fixed structure, we see it as a system that can evolve — responding to different landscapes, lifestyles and stages of life." />
                 <BlurReveal className={s.subtext}>Our approach combines the flexibility of modular architecture with the character and permanence of a carefully designed home. Every configuration begins with the same principle: make space for the life that happens inside it.</BlurReveal>
             </div>
             <div className={`container ${s.bottom}`}>
-                <ModularImage className={s.imageSm} alt="Concrete modular home" src="/about/story-sm.png" />
+                <ModularImage className={s.imageSm} alt="Concrete modular home" src="/about/story-sm.webp" />
                 <div className={s.btnWrap}>
                     <RollButton
-                        href=""
+                        href="/#approach"
                         className={s.btn}
                         text="SEE OUR APPROACH"
                         icon={<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">

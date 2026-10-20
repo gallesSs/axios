@@ -36,7 +36,7 @@ function Modular() {
         </h2>
       </div>
       <div className={s.content}>
-        <ModularImage src="/home/modular.png" className={s.image} />
+        <ModularImage src="/home/modular.webp" className={s.image} />
         <ModularList items={ITEMS} />
       </div>
       <ScrollWords

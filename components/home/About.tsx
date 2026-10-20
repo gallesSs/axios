@@ -13,7 +13,7 @@ function About() {
         <FlipLetters text="ABOUT" className={s.title} />
       </div>
       <div className={s.aboutContent}>
-        <RevealImage src="/home/about.png" className={s.img} />
+        <RevealImage src="/home/about.webp" alt="AXIS modular home" className={s.img} sizes="(min-width: 1024px) 30vw, 100vw" />
         <div className={`container ${s.textContent}`}>
           <div className={s.textTitles}>
             <LineReveal className={s.contentTitle}>WE CREATE SPACES</LineReveal>

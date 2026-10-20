@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Built from "@/components/about/Built";
 import Do from "@/components/about/Do";
 import Form from "@/components/about/Form";
@@ -6,6 +7,10 @@ import Story from "@/components/about/Story";
 import System from "@/components/about/System";
 import Why from "@/components/about/Why";
 
+export const metadata: Metadata = {
+    title: "About — AXIS",
+    description: "AXIS designs and builds modular homes shaped by place, purpose and the way you live.",
+};
 
 export default function About() {
     return (

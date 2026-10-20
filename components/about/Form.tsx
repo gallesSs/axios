@@ -37,7 +37,7 @@ export default function Form() {
                 <div className={s.content}>
                     <BlurReveal className={s.text}>Every home begins with a place, a need and a way of living. We turn these starting points into architecture — carefully considered, precisely built and designed to belong.</BlurReveal>
                     <RollButton
-                        href=""
+                        href="/contact"
                         className={s.btn}
                         text="START A PROJECT"
                         icon={<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">

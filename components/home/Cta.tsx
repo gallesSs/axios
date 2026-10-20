@@ -9,6 +9,7 @@ function Cta() {
             <StretchLetters lines={["FIND", "YOUR AXIS."]} className={s.title} />
             <BlurReveal className={s.text} delay={0.2}>Tell us about your site, your needs and the way you want to live. We&apos;ll help you find the right configuration.</BlurReveal>
             <RollButton
+                href="/contact"
                 className={s.button}
                 text="START A PROJECT"
                 icon={<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">

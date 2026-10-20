@@ -1,0 +1,28 @@
+/* Описание: мобилка — на всю ширину; десктоп (макет 1920) — колонка 1065 у правого края, по ширине */
+.text {
+    color: var(--Primary-01);
+
+    /* m/body → body */
+    font-family: var(--font-body);
+    font-size: var(--fs-body);
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+}
+
+/* В макете от галереи до футера: мобилка 60, десктоп 40 */
+.gallerySection {
+    margin-bottom: 60px;
+}
+
+@media (min-width: 1024px) {
+    .text {
+        width: calc(1065 / 1840 * 100%);
+        margin-left: auto;
+        text-align: justify;
+    }
+
+    .gallerySection {
+        margin-bottom: 40px;
+    }
+}

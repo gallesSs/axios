@@ -1,0 +1,22 @@
+/*
+ * Мобилка (макет 375): «/our projects» на 76px от верха, до списка 60.
+ * Десктоп (макет 1920): «/our projects» на 104px, до списка 80.
+ */
+.container {
+    padding-top: max(76px, calc(104 * var(--u)));
+    display: flex;
+    flex-direction: column;
+    gap: max(60px, calc(80 * var(--u)));
+}
+
+.title {
+    color: var(--Primary-01);
+
+    /* m/h3 → p1 */
+    font-family: var(--font-sans);
+    font-size: var(--fs-p1);
+    font-style: normal;
+    font-weight: 500;
+    line-height: 110%;
+    text-transform: uppercase;
+}

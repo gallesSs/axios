@@ -156,7 +156,7 @@
 .bg {
     position: absolute;
     inset: 0;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("/about/why.jpg");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("/about/why.webp");
     background-position: left;
     background-repeat: no-repeat;
     background-size: cover;

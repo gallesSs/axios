@@ -73,3 +73,19 @@
 .open .line:nth-child(3) {
     transform: translate(var(--x-dx), calc(-50% + var(--x-dy))) rotate(-40deg) scaleX(var(--x-scale));
 }
+
+/* Ховер (меню закрыто): верхние линии укорачиваются к правому краю «лесенкой» */
+@media (hover: hover) {
+    .button:not(.open):hover .line:nth-child(1) {
+        transform: translate(calc(var(--w) * 0.225), calc(-50% - var(--step))) scaleX(0.55);
+    }
+
+    .button:not(.open):hover .line:nth-child(2) {
+        transform: translate(calc(var(--w) * 0.1), -50%) scaleX(0.8);
+    }
+}
+
+.button:focus-visible {
+    outline: 1px solid currentColor;
+    outline-offset: 6px;
+}

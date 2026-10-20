@@ -2,7 +2,9 @@
 import BurgerButton from "./BurgerButton";
 import BurgerMenu from "./BurgerMenu";
 import Logo from "./Logo";
+import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/react";
 import { EASE_IN_OUT, EASE_OUT_EXPO, INTRO_DELAY } from "@/components/motion/config";
 import styles from "./Header.module.css";
@@ -25,6 +27,7 @@ export default function Header() {
     const [theme, setTheme] = useState<Theme>("hero")
     const ref = useRef<HTMLElement>(null)
     const { scrollY } = useScroll()
+    const pathname = usePathname()
 
     // Тему определяем по нижней кромке шапки: подложка появляется, как только hero ушёл из-под неё
     const detect = useCallback(() => {
@@ -45,10 +48,20 @@ export default function Header() {
     useMotionValueEvent(scrollY, "change", detect)
 
     useEffect(() => {
-        detect()
         window.addEventListener("resize", detect)
         return () => window.removeEventListener("resize", detect)
     }, [detect])
+
+    // Меню закрывается по Escape
+    useEffect(() => {
+        if (!isOpen) return
+        const onKey = (e: KeyboardEvent) => e.key === "Escape" && setIsOpen(false)
+        window.addEventListener("keydown", onKey)
+        return () => window.removeEventListener("keydown", onKey)
+    }, [isOpen])
+
+    // При клиентской навигации скролла может не быть — тему пересчитываем по новой странице
+    useEffect(detect, [detect, pathname])
 
     const plateShown = theme !== "hero" && !isOpen
     // Меню тёмное — поверх него логотип всегда белый
@@ -77,7 +90,9 @@ export default function Header() {
                 }}
             />
             <div className={`container ${styles.inner}`}>
-                <Logo className={styles.logo} />
+                <Link href="/" className={styles.logoLink} aria-label="AXIS — home" onClick={() => setIsOpen(false)}>
+                    <Logo className={styles.logo} />
+                </Link>
                 <BurgerButton isOpen={isOpen} onClick={() => setIsOpen((v) => !v)} />
             </div>
             <AnimatePresence>

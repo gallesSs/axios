@@ -10,6 +10,7 @@ import {
 } from "motion/react";
 import { useLenis } from "lenis/react";
 import { EASE_IN_OUT, INTRO_DELAY } from "./config";
+import { markIntroPlayed } from "./intro";
 import s from "./Preloader.module.css";
 
 const COLUMNS = 5;
@@ -27,7 +28,10 @@ export default function Preloader() {
     const controls = animate(count, 100, {
       duration: COUNT_DURATION,
       ease: EASE_IN_OUT,
-      onComplete: () => setDone(true),
+      onComplete: () => {
+        markIntroPlayed();
+        setDone(true);
+      },
     });
     return () => controls.stop();
   }, [count]);

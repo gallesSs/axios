@@ -48,6 +48,7 @@ function Find() {
           </BlurReveal>
         </div>
         <RollButton
+          href="/projects"
           className={s.button}
           text="EXPLORE THE COLLECTION"
           icon={
